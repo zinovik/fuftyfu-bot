@@ -10,38 +10,15 @@ import {
   finalPhrase,
 } from '../phrases/phrases-rus';
 
-export const handleMessages = (bot: any) => {
-  bot.onText(/\/start/, ({ chat: { id } }: { chat: { id: string } }) => {
+export const getAnswer = (request: any) => {
+  const { message: text, from: { first_name: firstName } } = request;
+
+  if (text === /\/start/) {
     const randomHedgehogNumber = getRandomHedgehogNumber();
 
-    bot.sendMessage(id, START_MESSAGE, getCommands(randomHedgehogNumber));
-  });
+    return START_MESSAGE; // , getCommands(randomHedgehogNumber)
+  }
 
-  bot.on(
-    'message',
-    ({
-      text,
-      chat: { id, first_name },
-    }: {
-      text: string;
-      chat: {
-        id: string;
-        first_name: string;
-      };
-    }) => {
-      const input = text.toString().toLowerCase();
-      console.log(id, input);
-
-      if (input.indexOf('/start') > -1 || input.indexOf('/echo') > -1) {
-        return;
-      }
-
-      bot.sendMessage(id, getResponse({ text: input, name: first_name }));
-    },
-  );
-};
-
-const getResponse = ({ text, name }: { text: string; name: string }): string => {
   if (text === 'help') {
     return HELP_MESSAGE;
   }
@@ -68,7 +45,7 @@ const getResponse = ({ text, name }: { text: string; name: string }): string => 
     return SIMPLE_PHRASES.find(phrase => phrase.message === text)!.answer;
   }
 
-  return finalPhrase(name);
+  return finalPhrase(firstName);
 };
 
 const getRandomHedgehogNumber = () => Math.floor(Math.random() * Number(hedgehogs.length)) + 1;

@@ -3,23 +3,21 @@ import axios from 'axios';
 
 dotenv.config();
 
-console.log(process.env.TOKEN);
-
-// import { handleMessages } from './hedgehog';
-
-// handleMessages({});
+import { getAnswer } from './hedgehog';
 
 exports.handler = (event: any, context: any, callback: any) => {
   console.log(event);
 
   const bodyParsed = JSON.parse(event.body);
 
+  const answer = getAnswer(bodyParsed);
+
   axios.post(`https://api.telegram.org/bot${process.env.TOKEN}/sendMessage`, {
     chat_id: bodyParsed.message.chat.id,
-    text: bodyParsed.message.text,
+    text: answer,
   })
-    .then((res) => {
-      console.log(res);
+    .then((response) => {
+      console.log(response);
     })
     .catch((error) => {
       console.error(error);
