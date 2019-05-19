@@ -11,7 +11,7 @@ import {
 } from '../phrases/phrases-rus';
 
 export const getAnswer = (request: any) => {
-  const { message: text, from: { first_name: firstName } } = request;
+  const { message: { text, from: { first_name: firstName } } } = request;
 
   if (text === /\/start/) {
     const randomHedgehogNumber = getRandomHedgehogNumber();
