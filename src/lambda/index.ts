@@ -12,9 +12,11 @@ console.log(process.env.TOKEN);
 exports.handler = (event: any, context: any, callback: any) => {
   console.log(event);
 
+  const bodyParsed = JSON.parse(event.body);
+
   axios.post(`https://api.telegram.org/bot${process.env.TOKEN}/sendMessage`, {
-    "chat_id": event.body.message.chat.id,
-    "text": event.body.message.text,
+    chat_id: bodyParsed.message.chat.id,
+    text: bodyParsed.message.text,
   })
     .then((res) => {
       console.log(res);
