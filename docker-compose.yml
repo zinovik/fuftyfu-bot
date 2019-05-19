@@ -1,12 +1,6 @@
 version: '3'
 
 services:
-  database:
-    image: redis:latest
-    restart: always
-    ports:
-      - 9379:6379
-
   api:
     build: .
     volumes:
@@ -14,5 +8,3 @@ services:
       - /usr/src/app/node_modules/
     ports:
       - 8100:8100
-    depends_on:
-      - database
