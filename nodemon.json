@@ -1,7 +1,0 @@
-{
-  "watch": ["src/index.ts", "src/hedgehog/*.ts"],
-  "ext": "ts",
-  "verbose": true,
-  "ignore": ["*.test.js", "fixtures/*"],
-  "exec": "tsc && npm start"
-}
