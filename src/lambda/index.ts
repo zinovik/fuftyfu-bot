@@ -13,28 +13,16 @@ exports.handler = (event: any, context: any, callback: any) => {
   const replyMarkup = getReplyMarkup(bodyParsed);
 
   axios.post(`https://api.telegram.org/bot${process.env.TOKEN}/sendMessage`, {
-    chat_id: bodyParsed.message.chat.id,
     text,
+    chat_id: bodyParsed.message.chat.id,
     reply_markup: replyMarkup,
   })
-    .then((response) => {
-      console.log(response);
+    .then(() => {
+      console.log('Message was successfully sent');
     })
-    .catch((error) => {
-      console.error(error);
+    .catch(() => {
+      console.error('Error sending message');
     });
 
-  callback(null, {
-    statusCode: 200,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      path: event.path,
-      query: event.queryStringParameters,
-      method: event.httpMethod,
-      headers: event.headers,
-      body: event.body,
-    }),
-  });
+  callback(null, { statusCode: 200 });
 };
