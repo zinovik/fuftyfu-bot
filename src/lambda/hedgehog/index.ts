@@ -10,13 +10,23 @@ import {
   finalPhrase,
 } from '../phrases/phrases-rus';
 
-export const getAnswer = (request: any) => {
-  const { message: { text, from: { first_name: firstName } } } = request;
+export const getReplyMarkup = (request: any): string => {
+  const { message: { text } } = request;
 
-  if (text === /\/start/) {
+  if (text === '/start') {
     const randomHedgehogNumber = getRandomHedgehogNumber();
 
-    return START_MESSAGE; // , getCommands(randomHedgehogNumber)
+    return JSON.stringify(getCommands(randomHedgehogNumber));
+  }
+
+  return '';
+};
+
+export const getText = (request: any): string => {
+  const { message: { text, from: { first_name: firstName } } } = request;
+
+  if (text === '/start') {
+    return START_MESSAGE;
   }
 
   if (text === 'help') {

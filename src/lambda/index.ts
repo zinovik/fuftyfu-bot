@@ -3,18 +3,20 @@ import axios from 'axios';
 
 dotenv.config();
 
-import { getAnswer } from './hedgehog';
+import { getText, getReplyMarkup } from './hedgehog';
 
 exports.handler = (event: any, context: any, callback: any) => {
   console.log(event);
 
   const bodyParsed = JSON.parse(event.body);
 
-  const answer = getAnswer(bodyParsed);
+  const text = getText(bodyParsed);
+  const replyMarkup = getReplyMarkup(bodyParsed);
 
   axios.post(`https://api.telegram.org/bot${process.env.TOKEN}/sendMessage`, {
     chat_id: bodyParsed.message.chat.id,
-    text: answer,
+    text,
+    reply_markup: 
   })
     .then((response) => {
       console.log(response);
