@@ -9,9 +9,10 @@ export const HELP_MESSAGE = `Фуф. Вот, что я уже умею:
 6) @icebrest, @dvvsbrest`;
 
 export const getCommands = (randomHedgehogNumber: number) => ({
-  reply_markup: {
-    keyboard: [['Фу', 'Фуфты', 'Фуфтыфу'], ['Ёжик', `${randomHedgehogNumber}`]],
-  },
+  keyboard: [
+    ['Фу', 'Фуфты', 'Фуфтыфу'],
+    ['Ёжик', `${randomHedgehogNumber}`],
+  ],
 });
 
 export const randomHedgehogMessages = ['ёжик', 'ежик'];
