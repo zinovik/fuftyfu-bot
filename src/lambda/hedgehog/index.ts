@@ -13,7 +13,9 @@ import {
 export const getReplyMarkup = (request: any): string => {
   const { message: { text } } = request;
 
-  if (text === '/start') {
+  const message = text.toLowerCase();
+
+  if (message === '/start') {
     const randomHedgehogNumber = getRandomHedgehogNumber();
 
     return JSON.stringify(getCommands(randomHedgehogNumber));
@@ -25,34 +27,36 @@ export const getReplyMarkup = (request: any): string => {
 export const getText = (request: any): string => {
   const { message: { text, from: { first_name: firstName } } } = request;
 
-  if (text === '/start') {
+  const message = text.toLowerCase();
+
+  if (message === '/start') {
     return START_MESSAGE;
   }
 
-  if (text === 'help') {
+  if (message === 'help') {
     return HELP_MESSAGE;
   }
 
-  if (randomHedgehogMessages.indexOf(text) >= 0) {
+  if (randomHedgehogMessages.indexOf(message) >= 0) {
     const randomHedgehogNumber = getRandomHedgehogNumber();
 
     return getHedgehog(randomHedgehogNumber, hedgehogs[randomHedgehogNumber - 1]);
   }
 
-  const hedgehogNumber = Number(text);
+  const hedgehogNumber = Number(message);
 
   if (hedgehogNumber) {
     if (hedgehogNumber >= 1 && hedgehogNumber <= Number(hedgehogs.length)) {
       return getHedgehog(hedgehogNumber, hedgehogs[hedgehogNumber - 1]);
     }
 
-    if (+text > hedgehogs.length) {
+    if (+message > hedgehogs.length) {
       return hedgehogsMaxCount(hedgehogs.length);
     }
   }
 
-  if (SIMPLE_PHRASES.some(phrase => phrase.message === text)) {
-    return SIMPLE_PHRASES.find(phrase => phrase.message === text)!.answer;
+  if (SIMPLE_PHRASES.some(phrase => phrase.message === message)) {
+    return SIMPLE_PHRASES.find(phrase => phrase.message === message)!.answer;
   }
 
   return finalPhrase(firstName);
