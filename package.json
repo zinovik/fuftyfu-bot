@@ -1,28 +1,19 @@
 {
-  "name": "zinovikbot",
+  "name": "fuftyfu-bot",
   "version": "0.1.0",
   "description": "simple telegram bot",
   "main": "dist",
   "dependencies": {
-    "axios": "^0.18.0",
-    "dotenv": "^8.0.0",
-    "express": "^4.16.4",
-    "helmet": "^3.18.0",
-    "jsdom": "^15.1.0",
-    "node-telegram-bot-api": "^0.30.0",
-    "redis": "^2.8.0"
+    "dotenv": "^8.0.0"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/aws-lambda": "^8.10.25",
     "@types/dotenv": "^6.1.1",
-    "@types/express": "^4.16.0",
-    "@types/helmet": "0.0.43",
     "@types/jest": "^24.0.13",
-    "@types/jsdom": "^12.2.0",
     "@types/node": "^12.0.1",
-    "@types/node-telegram-bot-api": "^0.31.0",
-    "@types/redis": "^2.8.12",
     "jest": "^24.8.0",
-    "nodemon": "^1.18.10",
+    "netlify-lambda": "^1.4.10",
     "prettier": "^1.17.1",
     "ts-jest": "^24.0.1",
     "tslint": "^5.15.0",
@@ -32,22 +23,20 @@
     "typescript": "^3.4.5"
   },
   "scripts": {
-    "start": "node dist",
-    "start:dev": "nodemon",
+    "start:lambda": "netlify-lambda serve src/lambda",
+    "build:lambda": "netlify-lambda build src/lambda",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
-    "test": "jest --config jestconfig.json",
-    "build": "tsc",
-    "postinstall": "tsc"
+    "test": "jest --config jestconfig.json"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zinovik/zinovikbot.git"
+    "url": "git+https://github.com/zinovik/fuftyfu-bot.git"
   },
   "author": "",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/zinovik/zinovikbot/issues"
+    "url": "https://github.com/zinovik/fuftyfu-bot/issues"
   },
-  "homepage": "https://github.com/zinovik/zinovikbot#readme"
+  "homepage": "https://github.com/zinovik/fuftyfu-bot#readme"
 }
