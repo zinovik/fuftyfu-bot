@@ -37,6 +37,9 @@ export const getHedgehog = (
 Привёз: ${who}
 В фуфтысемье с ${when}`;
 
+export const hedgehogNotFound = (findText: string): string =>
+  `Ёжика из ${findText} у меня пока нет :( Надо привезти :)`;
+
 export const hedgehogsMaxCount = (count: string) =>
   `Столько ёжиков у меня пока нет :( Есть только ${count} фуфтыёжиков (=`;
 

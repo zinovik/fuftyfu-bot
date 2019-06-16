@@ -5,6 +5,7 @@ import {
   getCommands,
   randomHedgehogMessages,
   getHedgehog,
+  hedgehogNotFound,
   hedgehogsMaxCount,
   SIMPLE_PHRASES,
   finalPhrase,
@@ -57,6 +58,24 @@ export const getText = (request: any): string => {
 
   if (SIMPLE_PHRASES.some(phrase => phrase.message === message)) {
     return SIMPLE_PHRASES.find(phrase => phrase.message === message)!.answer;
+  }
+
+  if (message.includes('find')) {
+    const findText = message.substring(5).trim();
+
+    let foundHedgehogNumber = 1;
+    const hedgehogFound = hedgehogs.find((hedgehog: any) => {
+      if (hedgehog.where.toLowerCase().includes(findText)) {
+        return true;
+      }
+      foundHedgehogNumber += 1;
+    });
+
+    if (hedgehogFound) {
+      return getHedgehog(foundHedgehogNumber, hedgehogFound);
+    }
+
+    return hedgehogNotFound(findText);
   }
 
   return finalPhrase(firstName);

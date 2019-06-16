@@ -7,7 +7,6 @@ WORKDIR /usr/src/app
 RUN mkdir /usr/src/app/src
 ADD src /usr/src/app/src/
 
-COPY nodemon.json /usr/src/app/
 COPY package.json /usr/src/app/
 COPY tsconfig.json /usr/src/app/
 COPY tslint.json /usr/src/app/
@@ -16,4 +15,4 @@ COPY tslint.json /usr/src/app/
 RUN npm install
 
 # Build and run the app
-CMD npm run start:dev
+CMD npm run start:lambda
