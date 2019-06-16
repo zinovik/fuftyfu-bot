@@ -12,6 +12,7 @@ export const getCommands = (randomHedgehogNumber: number) => ({
   keyboard: [
     ['Фу', 'Фуфты', 'Фуфтыфу'],
     ['Ёжик', `${randomHedgehogNumber}`],
+    ['find brest'],
   ],
 });
 
