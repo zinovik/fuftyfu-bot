@@ -6,6 +6,8 @@ import {
   randomHedgehogMessages,
   getHedgehog,
   hedgehogNotFound,
+  hedgehogsFoundCount,
+  tooManyHedgehogsFound,
   hedgehogsMaxCount,
   SIMPLE_PHRASES,
   finalPhrase,
@@ -63,19 +65,34 @@ export const getText = (request: any): string => {
   if (message.includes('find')) {
     const findText = message.substring(5).trim();
 
-    let foundHedgehogNumber = 1;
-    const hedgehogFound = hedgehogs.find((hedgehog: any) => {
-      if (hedgehog.where.toLowerCase().includes(findText)) {
-        return true;
-      }
-      foundHedgehogNumber += 1;
-    });
+    if (findText) {
+      const foundHedgehogsNumbers: number[] = [];
+      hedgehogs.forEach((hedgehog: any, hedgehogNumber: number) => {
 
-    if (hedgehogFound) {
-      return getHedgehog(foundHedgehogNumber, hedgehogFound);
+        const isHedgehogFound = hedgehog.where.some((where: string) => where.toLowerCase().includes(findText));
+
+        if (isHedgehogFound) {
+          foundHedgehogsNumbers.push(hedgehogNumber);
+          console.log(123, hedgehog.where);
+        }
+      });
+
+      console.log(foundHedgehogsNumbers);
+      if (foundHedgehogsNumbers.length > 15) {
+        return tooManyHedgehogsFound;
+      }
+
+      if (foundHedgehogsNumbers.length) {
+        let foundHedgehogs = `${hedgehogsFoundCount(foundHedgehogsNumbers.length)}`;
+        foundHedgehogsNumbers.forEach((foundHedgehogNumber) => {
+          foundHedgehogs += `\n\n---\n\n${getHedgehog(foundHedgehogNumber + 1, hedgehogs[foundHedgehogNumber])}`;
+        });
+        return foundHedgehogs;
+      }
+
+      return hedgehogNotFound(findText);
     }
 
-    return hedgehogNotFound(findText);
   }
 
   return finalPhrase(firstName);
