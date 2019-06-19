@@ -27,19 +27,24 @@ export const getHedgehog = (
     when,
   }: {
     url: string;
-    where: string;
+    where: string[];
     who: string;
     when: string;
   },
 ) => `Ёжик №${number}: ${url}
 
 Фуфтыдосье
-Приехал из: ${where}
+Приехал из: ${where[0]}
 Привёз: ${who}
 В фуфтысемье с ${when}`;
 
 export const hedgehogNotFound = (findText: string): string =>
   `Ёжика из ${findText} у меня пока нет :( Надо привезти :)`;
+
+export const hedgehogsFoundCount = (hedgehogsCount: number) => `Всего найден${hedgehogsCount % 10 === 1 ? '' : 'о'}`
+  + ` ${hedgehogsCount} ёжик${hedgehogsCount % 10 === 1 ? '' : [2, 3, 4].includes(hedgehogsCount % 10) ? 'а' : 'ов'}:`;
+
+export const tooManyHedgehogsFound = 'Слишком много подходящих ёжиков найдено, надо точнее указать место.';
 
 export const hedgehogsMaxCount = (count: string) =>
   `Столько ёжиков у меня пока нет :( Есть только ${count} фуфтыёжиков (=`;
