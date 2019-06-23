@@ -1,4 +1,4 @@
-import { hedgehogs } from './info';
+import { hedgehogs } from '../db';
 import {
   START_MESSAGE,
   HELP_MESSAGE,
@@ -11,7 +11,7 @@ import {
   hedgehogsMaxCount,
   SIMPLE_PHRASES,
   finalPhrase,
-} from '../phrases/phrases-rus';
+} from './phrases/phrases-rus';
 
 export const getReplyMarkup = (request: any): string => {
   const { message: { text } } = request;

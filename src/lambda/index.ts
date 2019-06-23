@@ -1,28 +1,35 @@
+import 'babel-polyfill';
+
 import * as dotenv from 'dotenv';
-import axios from 'axios';
+
+import { sendMessage } from '../telegram';
+import { IMessageBody } from '../telegram/IMessageBody.interface';
 
 dotenv.config();
 
-import { getText, getReplyMarkup } from './hedgehog';
+import { getText, getReplyMarkup } from '../hedgehog';
 
-exports.handler = (event: any, context: any, callback: any) => {
-  const bodyParsed = JSON.parse(event.body);
+exports.handler = async (event: { body: string }, context: never) => {
+  const bodyParsed: IMessageBody = JSON.parse(event.body);
   console.log(bodyParsed);
 
   const text = getText(bodyParsed);
   const replyMarkup = getReplyMarkup(bodyParsed);
 
-  axios.post(`https://api.telegram.org/bot${process.env.TOKEN}/sendMessage`, {
-    text,
-    chat_id: bodyParsed.message.chat.id,
-    reply_markup: replyMarkup,
-  })
-    .then(() => {
-      console.log('Message was successfully sent');
-    })
-    .catch(() => {
-      console.error('Error sending message');
-    });
+  if (!process.env.TOKEN) {
+    throw new Error('Token is not provided! Check environment variables!');
+  }
 
-  callback(null, { statusCode: 200 });
+  try {
+    await sendMessage({
+      text,
+      replyMarkup,
+      token: process.env.TOKEN,
+      chatId: bodyParsed.message.chat.id,
+    });
+  } catch (error) {
+    console.error('Error sending message');
+  }
+
+  return { statusCode: 200 };
 };

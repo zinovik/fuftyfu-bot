@@ -46,7 +46,7 @@ export const hedgehogsFoundCount = (hedgehogsCount: number) => `Всего на�
 
 export const tooManyHedgehogsFound = 'Слишком много подходящих ёжиков найдено, надо точнее указать место.';
 
-export const hedgehogsMaxCount = (count: string) =>
+export const hedgehogsMaxCount = (count: number) =>
   `Столько ёжиков у меня пока нет :( Есть только ${count} фуфтыёжиков (=`;
 
 export const SIMPLE_PHRASES = [

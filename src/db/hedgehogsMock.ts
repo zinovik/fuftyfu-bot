@@ -1,12 +1,6 @@
-let hedgehogsFromEnv: string;
+import { IHedgehog } from './IHedgehog.interface';
 
-try {
-  hedgehogsFromEnv = JSON.parse(process.env.HEDGEHOGS || '');
-} catch (error) {
-  hedgehogsFromEnv = '';
-}
-
-export const hedgehogs = (hedgehogsFromEnv as any) || [
+export const hedgehogsMock: IHedgehog[] = [
   {
     where: ['Brest', 'Брест', 'Брэст'],
     who: 'Natasha and Tanja',
@@ -56,19 +50,19 @@ export const hedgehogs = (hedgehogsFromEnv as any) || [
     url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849318/hedgehogs/2014.04.12_008_Nyasvizh_Mir_2._Lena.jpg',
   },
   {
-    where: ['Hrodna', 'Grodno', 'Гродно'],
+    where: ['Hrodna', 'Grodno', 'Гродно', 'Гродна'],
     who: 'Lena',
     when: '2014.04.22',
     url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849320/hedgehogs/2014.04.22_009_Hrodna._Lena.jpg',
   },
   {
-    where: ['Polatsk'],
+    where: ['Polatsk', 'Polotsk', 'Полацк', 'Полоцк'],
     who: 'Lena',
     when: '2014.04.24',
     url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849320/hedgehogs/2014.04.24_010_Polatsk._Lena.jpg',
   },
   {
-    where: ['Mensk'],
+    where: ['Mensk', 'Minsk', 'Менск', 'Мiнск', 'Минск'],
     who: 'Lena',
     when: '2014.04.25',
     url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849321/hedgehogs/2014.04.25_011_Mensk._Lena.jpg',
@@ -86,7 +80,7 @@ export const hedgehogs = (hedgehogsFromEnv as any) || [
     url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849316/hedgehogs/2014.06.XX_013_Brest._Max.jpg',
   },
   {
-    where: ['Rechytsa'],
+    where: ['Rechytsa', 'Речыца', 'Речица'],
     who: 'Max',
     when: '2014.08.18',
     url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849316/hedgehogs/2014.08.18_014_Rechytsa._Max.jpg',
@@ -110,7 +104,7 @@ export const hedgehogs = (hedgehogsFromEnv as any) || [
     url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849318/hedgehogs/2015.01.02_017_Moscow._Vitalik.jpg',
   },
   {
-    where: ['Biala Podlaska'],
+    where: ['Biala Podlaska', 'Бяла-Подляска'],
     who: 'Max',
     when: '2015.01.31',
     url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849319/hedgehogs/2015.01.31_018_Biala_Podlaska._Max.jpg',
@@ -140,7 +134,7 @@ export const hedgehogs = (hedgehogsFromEnv as any) || [
     url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849321/hedgehogs/2015.04.24_022_Moscow._Lena.jpg',
   },
   {
-    where: ['Oberhof'],
+    where: ['Oberhof', 'Оберхоф'],
     who: 'Irka',
     when: '2015.04.28',
     url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849321/hedgehogs/2015.04.28_023_Oberhof._Irka.jpg',
@@ -272,7 +266,7 @@ export const hedgehogs = (hedgehogsFromEnv as any) || [
     url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849328/hedgehogs/2017.01.02_044_Lviv._Lena.jpg',
   },
   {
-    where: ['Watsonville'],
+    where: ['Watsonville', 'Уотсонвилл'],
     who: 'Sandra',
     when: '2017.01.11',
     url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849329/hedgehogs/2017.01.11_045_Watsonville._Sandra.jpg',
