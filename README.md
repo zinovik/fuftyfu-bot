@@ -9,6 +9,10 @@
 ```bash
 docker-compose up
 ```
+or
+```bash
+npm run start:lambda
+```
 
 3. setup bot
 ```bash
