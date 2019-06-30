@@ -4,10 +4,14 @@ import { promisify } from 'util';
 import { IHedgehog } from './IHedgehog.interface';
 
 export const getHedgehogs = async (): Promise<IHedgehog[]> => {
+  if (!process.env.SPREADSHEET_ID || !process.env.GOOGLE_PRIVATE_KEY || !process.env.GOOGLE_CLIENT_EMAIL) {
+    throw new Error('No config vars');
+  }
+
   const doc = new GoogleSpreadsheet(process.env.SPREADSHEET_ID);
 
   const creds = {
-    private_key: JSON.parse(JSON.stringify(process.env.GOOGLE_PRIVATE_KEY)),
+    private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
     client_email: process.env.GOOGLE_CLIENT_EMAIL,
   };
 
