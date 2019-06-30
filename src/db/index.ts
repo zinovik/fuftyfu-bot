@@ -15,8 +15,6 @@ export const getHedgehogs = async (): Promise<IHedgehog[]> => {
     client_email: process.env.GOOGLE_CLIENT_EMAIL,
   };
 
-  console.log(creds);
-
   await promisify(doc.useServiceAccountAuth)(creds);
   const info = await promisify(doc.getInfo)();
 
