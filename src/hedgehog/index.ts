@@ -1,4 +1,4 @@
-import { hedgehogs } from '../db';
+import { getHedgehogs } from '../db';
 import {
   START_MESSAGE,
   HELP_MESSAGE,
@@ -13,13 +13,15 @@ import {
   finalPhrase,
 } from './phrases/phrases-rus';
 
-export const getReplyMarkup = (request: any): string => {
+export const getReplyMarkup = async (request: any): Promise<string> => {
   const { message: { text } } = request;
 
   const message = text.toLowerCase();
 
+  const hedgehogs = await getHedgehogs();
+
   if (message === '/start') {
-    const randomHedgehogNumber = getRandomHedgehogNumber();
+    const randomHedgehogNumber = getRandomHedgehogNumber(hedgehogs.length);
 
     return JSON.stringify(getCommands(randomHedgehogNumber));
   }
@@ -27,7 +29,7 @@ export const getReplyMarkup = (request: any): string => {
   return '';
 };
 
-export const getText = (request: any): string => {
+export const getText = async (request: any): Promise<string> => {
   const { message: { text, from: { first_name: firstName } } } = request;
 
   const message = text.toLowerCase();
@@ -40,14 +42,15 @@ export const getText = (request: any): string => {
     return HELP_MESSAGE;
   }
 
+  const hedgehogNumber = Number(message);
+
+  const hedgehogs = await getHedgehogs();
+
   if (randomHedgehogMessages.indexOf(message) >= 0) {
-    const randomHedgehogNumber = getRandomHedgehogNumber();
+    const randomHedgehogNumber = getRandomHedgehogNumber(hedgehogs.length);
 
     return getHedgehog(randomHedgehogNumber, hedgehogs[randomHedgehogNumber - 1]);
   }
-
-  const hedgehogNumber = Number(message);
-
   if (hedgehogNumber) {
     if (hedgehogNumber >= 1 && hedgehogNumber <= Number(hedgehogs.length)) {
       return getHedgehog(hedgehogNumber, hedgehogs[hedgehogNumber - 1]);
@@ -98,4 +101,4 @@ export const getText = (request: any): string => {
   return finalPhrase(firstName);
 };
 
-const getRandomHedgehogNumber = () => Math.floor(Math.random() * Number(hedgehogs.length)) + 1;
+const getRandomHedgehogNumber = (hedgehogsCount: number) => Math.floor(Math.random() * Number(hedgehogsCount)) + 1;

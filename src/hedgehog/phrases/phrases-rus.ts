@@ -41,8 +41,7 @@ export const getHedgehog = (
 export const hedgehogNotFound = (findText: string): string =>
   `Ёжика из ${findText} у меня пока нет :( Надо привезти :)`;
 
-export const hedgehogsFoundCount = (hedgehogsCount: number) => `Всего найден${hedgehogsCount % 10 === 1 ? '' : 'о'}`
-  + ` ${hedgehogsCount} ёжик${hedgehogsCount % 10 === 1 ? '' : [2, 3, 4].includes(hedgehogsCount % 10) ? 'а' : 'ов'}:`;
+export const hedgehogsFoundCount = (hedgehogsCount: number) => `Всего найдено ёжиков: ${hedgehogsCount}`;
 
 export const tooManyHedgehogsFound = 'Слишком много подходящих ёжиков найдено, надо точнее указать место.';
 

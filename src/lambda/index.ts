@@ -13,8 +13,8 @@ exports.handler = async (event: { body: string }, context: never) => {
   const bodyParsed: IMessageBody = JSON.parse(event.body);
   console.log(bodyParsed);
 
-  const text = getText(bodyParsed);
-  const replyMarkup = getReplyMarkup(bodyParsed);
+  const text = await getText(bodyParsed);
+  const replyMarkup = await getReplyMarkup(bodyParsed);
 
   if (!process.env.TOKEN) {
     throw new Error('Token is not provided! Check environment variables!');
