@@ -26,7 +26,7 @@ export const getHedgehogs = async (): Promise<IHedgehog[]> => {
 
   return rows.map((row: any) => {
     return {
-      where: row.where,
+      where: row.where.split(','),
       who: row.who,
       when: row.when,
       url: row.url,
