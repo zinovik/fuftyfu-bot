@@ -1,4 +1,4 @@
-const GoogleSpreadsheet = require('google-spreadsheet');
+const googleSpreadsheet = require('google-spreadsheet');
 import { promisify } from 'util';
 
 import { IHedgehog } from './IHedgehog.interface';
@@ -8,7 +8,7 @@ export const getHedgehogs = async (): Promise<IHedgehog[]> => {
     throw new Error('No config vars');
   }
 
-  const doc = new GoogleSpreadsheet(process.env.SPREADSHEET_ID);
+  const doc = new googleSpreadsheet(process.env.SPREADSHEET_ID);
 
   const creds = {
     private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
