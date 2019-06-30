@@ -76,11 +76,9 @@ export const getText = async (request: any): Promise<string> => {
 
         if (isHedgehogFound) {
           foundHedgehogsNumbers.push(hedgehogNumber);
-          console.log(123, hedgehog.where);
         }
       });
 
-      console.log(foundHedgehogsNumbers);
       if (foundHedgehogsNumbers.length > 15) {
         return tooManyHedgehogsFound;
       }

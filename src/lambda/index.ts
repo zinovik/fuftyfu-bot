@@ -11,7 +11,6 @@ import { getText, getReplyMarkup } from '../hedgehog';
 
 exports.handler = async (event: { body: string }, context: never) => {
   const bodyParsed: IMessageBody = JSON.parse(event.body);
-  console.log(bodyParsed);
 
   const text = await getText(bodyParsed);
   const replyMarkup = await getReplyMarkup(bodyParsed);
