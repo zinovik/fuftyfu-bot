@@ -7,7 +7,7 @@ export const getHedgehogs = async (): Promise<IHedgehog[]> => {
   const doc = new GoogleSpreadsheet(process.env.SPREADSHEET_ID);
 
   const creds = {
-    private_key: process.env.GOOGLE_PRIVATE_KEY,
+    private_key: JSON.parse(JSON.stringify(process.env.GOOGLE_PRIVATE_KEY)),
     client_email: process.env.GOOGLE_CLIENT_EMAIL,
   };
 
