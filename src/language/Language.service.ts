@@ -57,14 +57,11 @@ export class LanguageService implements ILanguageService {
     }
 
     // Check simple commands
-    if (
-      phrases.simpleCommands.buttons.some(button => button.command === messageText) ||
-      phrases.simpleCommands.rest.some(button => button.command === messageText)
-    ) {
-      return (
-        phrases.simpleCommands.buttons.find(button => button.command === messageText)!.answer ||
-        phrases.simpleCommands.rest.find(button => button.command === messageText)!.answer
-      );
+    if (phrases.simpleCommands.buttons.some(button => button.command === messageText)) {
+      return phrases.simpleCommands.buttons.find(button => button.command === messageText)!.answer;
+    }
+    if (phrases.simpleCommands.rest.some(button => button.command === messageText)) {
+      return phrases.simpleCommands.rest.find(button => button.command === messageText)!.answer;
     }
 
     // Find hedgehogs
