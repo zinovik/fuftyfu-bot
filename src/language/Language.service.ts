@@ -66,7 +66,7 @@ export class LanguageService implements ILanguageService {
 
     // Find hedgehogs
     if (messageText.includes(phrases.findCommand)) {
-      const findText = messageText.substring(5).trim();
+      const findText = messageText.split(' ')[1];
 
       if (findText) {
         const foundHedgehogs = hedgehogs.filter(hedgehog =>
