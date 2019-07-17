@@ -16,12 +16,12 @@ npm run start:lambda
 
 3. setup bot
 ```bash
-curl https://api.telegram.org/bot<TOKEN>/setWebhook?url=https://fuftyfu-bot.netlify.com/.netlify/functions/index
+ curl https://api.telegram.org/bot<TOKEN>/setWebhook?url=https://fuftyfu-bot.netlify.com/.netlify/functions/index
 ```
 
 **testing**
 
 ```bash
-curl https://api.telegram.org/bot<TOKEN>/setWebhook?url=https://<NGROK ID>.ngrok.io/index
+ curl https://api.telegram.org/bot<TOKEN>/setWebhook?url=https://<NGROK ID>.ngrok.io/index
 ~/ngrok http 9000
 ```
