@@ -28,14 +28,18 @@ exports.handler = async ({ body }: IEvent, context: never) => {
   const hedgehog = new Hedgehog(
     new GoogleSpreadsheetService(
       process.env.SPREADSHEET_ID,
-      process.env.GOOGLE_PRIVATE_KEY,
+      process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
       process.env.GOOGLE_CLIENT_EMAIL,
     ),
     new LanguageService(),
     new TelegramService(process.env.TOKEN),
   );
 
-  await hedgehog.processMessage(body);
+  try {
+    await hedgehog.processMessage(body);
+  } catch (error) {
+    console.error('Unexpected error occurred.', error.message);
+  }
 
   return {
     statusCode: 200,

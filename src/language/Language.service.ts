@@ -1,116 +1,115 @@
 import { ILanguageService } from './ILanguageService.interface';
-import { GoogleSpreadsheetService } from '../database/GoogleSpreadsheet.service';
-import {
-  START_MESSAGE,
-  HELP_MESSAGE,
-  getCommands,
-  randomHedgehogMessages,
-  getHedgehog,
-  hedgehogNotFound,
-  hedgehogsFoundCount,
-  tooManyHedgehogsFound,
-  hedgehogsMaxCount,
-  SIMPLE_PHRASES,
-  finalPhrase,
-} from './phrases/phrases-rus';
+import { IHedgehog } from '../common/model/IHedgehog.interface';
 
-const googleSpreadsheetService = new GoogleSpreadsheetService(
-  process.env.SPREADSHEET_ID as string,
-  process.env.GOOGLE_PRIVATE_KEY as string,
-  process.env.GOOGLE_CLIENT_EMAIL as string,
-);
+import { IPhrases } from './phrases/IPhrases.interface';
+import { en } from './phrases/en';
+import { ru } from './phrases/ru';
 
-const getRandomHedgehogNumber = (hedgehogsCount: number) => Math.floor(Math.random() * Number(hedgehogsCount)) + 1;
+const PHRASES: { [key: string]: IPhrases } = { en, ru };
 
 export class LanguageService implements ILanguageService {
-  async getReplyMarkup(request: any): Promise<string> {
-    const {
-      message: { text },
-    } = request;
+  async getReplyMarkup(languageCode: string, hedgehogsCount: number): Promise<string> {
+    const phrases = this.getPhrases(languageCode);
+    const simpleCommandsButtons = phrases.simpleCommands.buttons.map(button => button.command);
 
-    const message = text.toLowerCase();
+    const randomHedgehogNumber = this.getRandomHedgehogNumber(hedgehogsCount);
 
-    const hedgehogs = await googleSpreadsheetService.getAllHedgehogs();
-
-    if (message === '/start') {
-      const randomHedgehogNumber = getRandomHedgehogNumber(hedgehogs.length);
-
-      return JSON.stringify(getCommands(randomHedgehogNumber));
-    }
-
-    return '';
+    return JSON.stringify({
+      keyboard: [
+        simpleCommandsButtons,
+        [phrases.randomHedgehogCommands[0], String(randomHedgehogNumber)],
+        [`${phrases.findCommand} ${phrases.findExample}`],
+      ],
+    });
   }
 
-  async getText(request: any): Promise<string> {
-    const {
-      message: {
-        text,
-        from: { first_name: firstName },
-      },
-    } = request;
+  async getText({
+    languageCode,
+    messageText,
+    firstName,
+    hedgehogs,
+  }: {
+    languageCode: string;
+    messageText: string;
+    firstName: string;
+    hedgehogs: IHedgehog[];
+  }): Promise<string> {
+    const phrases = this.getPhrases(languageCode);
 
-    const message = text.toLowerCase();
+    // Check random hedgehog
+    if (phrases.randomHedgehogCommands.includes(messageText)) {
+      const randomHedgehogNumber = this.getRandomHedgehogNumber(hedgehogs.length);
 
-    if (message === '/start') {
-      return START_MESSAGE;
+      return this.getHedgehog(phrases, hedgehogs[randomHedgehogNumber - 1]);
     }
 
-    if (message === 'help') {
-      return HELP_MESSAGE;
-    }
+    // Check hedgehog number
+    const hedgehogNumber = Number(messageText);
 
-    const hedgehogNumber = Number(message);
-
-    const hedgehogs = await googleSpreadsheetService.getAllHedgehogs();
-
-    if (randomHedgehogMessages.indexOf(message) >= 0) {
-      const randomHedgehogNumber = getRandomHedgehogNumber(hedgehogs.length);
-
-      return getHedgehog(randomHedgehogNumber, hedgehogs[randomHedgehogNumber - 1]);
-    }
     if (hedgehogNumber) {
       if (hedgehogNumber >= 1 && hedgehogNumber <= Number(hedgehogs.length)) {
-        return getHedgehog(hedgehogNumber, hedgehogs[hedgehogNumber - 1]);
+        return this.getHedgehog(phrases, hedgehogs[hedgehogNumber - 1]);
       }
 
-      if (+message > hedgehogs.length) {
-        return hedgehogsMaxCount(hedgehogs.length);
+      if (hedgehogNumber > hedgehogs.length) {
+        return `${phrases.maxCountAnswerStart}${hedgehogs.length}${phrases.maxCountAnswerEnd}`;
       }
     }
 
-    if (SIMPLE_PHRASES.some(phrase => phrase.message === message)) {
-      return SIMPLE_PHRASES.find(phrase => phrase.message === message)!.answer;
+    // Check simple commands
+    if (
+      phrases.simpleCommands.buttons.some(button => button.command === messageText) ||
+      phrases.simpleCommands.rest.some(button => button.command === messageText)
+    ) {
+      return (
+        phrases.simpleCommands.buttons.find(button => button.command === messageText)!.answer ||
+        phrases.simpleCommands.rest.find(button => button.command === messageText)!.answer
+      );
     }
 
-    if (message.includes('find')) {
-      const findText = message.substring(5).trim();
+    // Find hedgehogs
+    if (messageText.includes(phrases.findCommand)) {
+      const findText = messageText.substring(5).trim();
 
       if (findText) {
-        const foundHedgehogsNumbers: number[] = [];
-        hedgehogs.forEach((hedgehog: any, hedgehogNumber: number) => {
-          const isHedgehogFound = hedgehog.where.some((where: string) => where.toLowerCase().includes(findText));
+        const foundHedgehogs = hedgehogs.filter(hedgehog =>
+          hedgehog.where.some(where => where.toLowerCase().includes(findText)),
+        );
 
-          if (isHedgehogFound) {
-            foundHedgehogsNumbers.push(hedgehogNumber);
-          }
-        });
-
-        if (foundHedgehogsNumbers.length > 15) {
-          return tooManyHedgehogsFound;
+        if (foundHedgehogs.length > 20) {
+          return phrases.tooManyHedgehogsFoundAnswer;
         }
 
-        if (foundHedgehogsNumbers.length) {
-          let foundHedgehogs = `${hedgehogsFoundCount(foundHedgehogsNumbers.length)}`;
-          foundHedgehogsNumbers.forEach((foundHedgehogNumber) => {
-            foundHedgehogs += `\n\n---\n\n${getHedgehog(foundHedgehogNumber + 1, hedgehogs[foundHedgehogNumber])}`;
-          });
-          return foundHedgehogs;
+        if (foundHedgehogs.length) {
+          return foundHedgehogs.reduce(
+            (foundHedgehogsAnswer, hedgehog) =>
+              `${foundHedgehogsAnswer}\n\n---\n\n${this.getHedgehog(phrases, hedgehog)}`,
+            '',
+          );
         }
 
-        return hedgehogNotFound(findText);
+        return `${phrases.hedgehogNotFoundAnswerStart}${findText}${phrases.hedgehogNotFoundAnswerEnd}`;
       }
     }
 
-    return finalPhrase(firstName);
+    // Final answer
+    return `${phrases.finalAnswerStart}${firstName}${phrases.finalAnswerEnd}`;
+  }
+
+  private getPhrases(languageCode: string): IPhrases {
+    return PHRASES[languageCode] || PHRASES.en;
+  }
+
+  private getRandomHedgehogNumber(hedgehogsCount: number): number {
+    return Math.floor(Math.random() * Number(hedgehogsCount)) + 1;
+  }
+
+  private getHedgehog(phrases: IPhrases, { number, url, where, who, when }: IHedgehog) {
+    return `${phrases.hedgehogNumberAnswerStart}${number}${phrases.hedgehogNumberAnswerMiddle}${url}
+
+    ${phrases.hedgehogInfoAnswer}
+    ${phrases.hedgehogWhereAnswer}${where[0]}
+    ${phrases.hedgehogWhoAnswer}${who}
+    ${phrases.hedgehogWhenAnswer}${when}`;
   }
 }

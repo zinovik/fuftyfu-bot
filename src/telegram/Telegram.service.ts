@@ -2,8 +2,12 @@ import axios from 'axios';
 
 import { ITelegramService } from './ITelegramService.interface';
 
+const TELEGRAM_API_URL = 'https://api.telegram.org/bot';
+
 export class TelegramService implements ITelegramService {
-  constructor(private readonly token: string) {}
+  constructor(private readonly token: string) {
+    this.token = token;
+  }
 
   async sendMessage({
     text,
@@ -14,11 +18,16 @@ export class TelegramService implements ITelegramService {
     replyMarkup: string;
     chatId: number;
   }): Promise<void> {
-    const { data } = await axios.post(`https://api.telegram.org/bot${this.token}/sendMessage`, {
+    const message = {
       text,
       reply_markup: replyMarkup,
       chat_id: chatId,
-    });
-    console.log(`Message was successfully sent: ${data}`);
+    };
+
+    console.log(`Sending telegram message: ${JSON.stringify(message)}...`);
+
+    const { data } = await axios.post(`${TELEGRAM_API_URL}${this.token}/sendMessage`, message);
+
+    console.log(`Telegram message was successfully sent: ${JSON.stringify(data)}`);
   }
 }
