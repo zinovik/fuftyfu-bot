@@ -1,13 +1,13 @@
 export interface IPhrases {
   simpleCommands: {
-    buttons: {
+    buttons: Array<{
       command: string;
       answer: string;
-    }[];
-    rest: {
+    }>;
+    rest: Array<{
       command: string;
       answer: string;
-    }[];
+    }>;
   };
   findCommand: string;
   findExample: string;

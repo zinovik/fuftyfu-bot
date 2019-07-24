@@ -1,3 +1,4 @@
+// tslint:disable-next-line
 const googleSpreadsheet = require('google-spreadsheet');
 import { promisify } from 'util';
 
@@ -5,11 +6,7 @@ import { IDatabaseService } from './IDatabaseService.interface';
 import { IHedgehog } from '../common/model/IHedgehog.interface';
 
 export class GoogleSpreadsheetService implements IDatabaseService {
-  constructor(
-    private readonly spreadsheetId: string,
-    private readonly googlePrivateKey: string,
-    private readonly googleClientEmail: string,
-  ) {
+  constructor(private readonly spreadsheetId: string, private readonly googlePrivateKey: string, private readonly googleClientEmail: string) {
     this.spreadsheetId = spreadsheetId;
     this.googlePrivateKey = googlePrivateKey;
     this.googleClientEmail = googleClientEmail;
@@ -41,7 +38,7 @@ export class GoogleSpreadsheetService implements IDatabaseService {
 
     return rows.map((row: any) => {
       return {
-        number: hedgehogNumber++,
+        hedgehogNumber: hedgehogNumber++,
         where: row.where.split(','),
         who: row.who,
         when: row.when,
