@@ -26,11 +26,7 @@ exports.handler = async ({ body }: IEvent, context: never) => {
   }
 
   const hedgehog = new Hedgehog(
-    new GoogleSpreadsheetService(
-      process.env.SPREADSHEET_ID,
-      process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
-      process.env.GOOGLE_CLIENT_EMAIL,
-    ),
+    new GoogleSpreadsheetService(process.env.SPREADSHEET_ID, process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'), process.env.GOOGLE_CLIENT_EMAIL),
     new LanguageService(),
     new TelegramService(process.env.TOKEN),
   );

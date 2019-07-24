@@ -1,5 +1,5 @@
 export interface IHedgehog {
-  number: number;
+  hedgehogNumber: number;
   where: string[];
   who: string;
   when: string;

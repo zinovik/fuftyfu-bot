@@ -69,9 +69,7 @@ export class LanguageService implements ILanguageService {
       const findText = messageText.split(' ')[1];
 
       if (findText) {
-        const foundHedgehogs = hedgehogs.filter(hedgehog =>
-          hedgehog.where.some(where => where.toLowerCase().includes(findText)),
-        );
+        const foundHedgehogs = hedgehogs.filter(hedgehog => hedgehog.where.some(where => where.toLowerCase().includes(findText)));
 
         if (foundHedgehogs.length > 20) {
           return phrases.tooManyHedgehogsFoundAnswer;
@@ -79,8 +77,7 @@ export class LanguageService implements ILanguageService {
 
         if (foundHedgehogs.length) {
           return foundHedgehogs.reduce(
-            (foundHedgehogsAnswer, hedgehog) =>
-              `${foundHedgehogsAnswer}\n\n---\n\n${this.getHedgehog(phrases, hedgehog)}`,
+            (foundHedgehogsAnswer, hedgehog) => `${foundHedgehogsAnswer}\n\n---\n\n${this.getHedgehog(phrases, hedgehog)}`,
             '',
           );
         }
@@ -101,8 +98,8 @@ export class LanguageService implements ILanguageService {
     return Math.floor(Math.random() * Number(hedgehogsCount)) + 1;
   }
 
-  private getHedgehog(phrases: IPhrases, { number, url, where, who, when }: IHedgehog) {
-    return `${phrases.hedgehogNumberAnswerStart}${number}${phrases.hedgehogNumberAnswerMiddle}${url}
+  private getHedgehog(phrases: IPhrases, { hedgehogNumber, url, where, who, when }: IHedgehog) {
+    return `${phrases.hedgehogNumberAnswerStart}${hedgehogNumber}${phrases.hedgehogNumberAnswerMiddle}${url}
 
     ${phrases.hedgehogInfoAnswer}
     ${phrases.hedgehogWhereAnswer}${where[0]}

@@ -7,8 +7,7 @@ export class Hardcode20190714 implements IDatabaseService {
       where: ['Brest', 'Брест', 'Брэст'],
       who: 'Natasha and Tanja',
       when: '2013.05.XX',
-      url:
-        'https://res.cloudinary.com/zinovik/image/upload/v1557849316/hedgehogs/2013.05.XX_001_Brest._Natasha_and_Tanja.jpg',
+      url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849316/hedgehogs/2013.05.XX_001_Brest._Natasha_and_Tanja.jpg',
     },
     {
       where: ['Lviv', 'Lvov', 'Львов', 'Львiв'],
@@ -20,22 +19,19 @@ export class Hardcode20190714 implements IDatabaseService {
       where: ['Krym', 'Крым'],
       who: 'Roma and Lena',
       when: '2013.08.XX',
-      url:
-        'https://res.cloudinary.com/zinovik/image/upload/v1557849317/hedgehogs/2013.08.XX_003_Krym._Roma_and_Lena.jpg',
+      url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849317/hedgehogs/2013.08.XX_003_Krym._Roma_and_Lena.jpg',
     },
     {
       where: ['Nyasvizh', 'Nesvizh', 'Нясвiж', 'Несвиж'],
       who: 'Roma and Lena',
       when: '2013.10.XX',
-      url:
-        'https://res.cloudinary.com/zinovik/image/upload/v1557849317/hedgehogs/2013.10.XX_004_Nyasvizh._Roma_and_Lena.jpg',
+      url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849317/hedgehogs/2013.10.XX_004_Nyasvizh._Roma_and_Lena.jpg',
     },
     {
       where: ['Brest', 'Брест', 'Брэст'],
       who: 'Roma and Lena',
       when: '2014.01.XX',
-      url:
-        'https://res.cloudinary.com/zinovik/image/upload/v1557849317/hedgehogs/2014.01.XX_005_Brest._Roma_and_Lena.jpg',
+      url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849317/hedgehogs/2014.01.XX_005_Brest._Roma_and_Lena.jpg',
     },
     {
       where: ['Mir', 'Мiр', 'Мир'],
@@ -47,15 +43,13 @@ export class Hardcode20190714 implements IDatabaseService {
       where: ['Nyasvizh & Mir 1', 'Nesvizh & Mir 1', 'Нясвiж & Мiр', 'Несвиж и Мир'],
       who: 'Lena',
       when: '2014.04.12',
-      url:
-        'https://res.cloudinary.com/zinovik/image/upload/v1557849318/hedgehogs/2014.04.12_007_Nyasvizh_Mir_1._Lena.jpg',
+      url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849318/hedgehogs/2014.04.12_007_Nyasvizh_Mir_1._Lena.jpg',
     },
     {
       where: ['Nyasvizh & Mir 1', 'Nesvizh & Mir 1', 'Нясвiж & Мiр', 'Несвиж и Мир'],
       who: 'Lena',
       when: '2014.04.12',
-      url:
-        'https://res.cloudinary.com/zinovik/image/upload/v1557849318/hedgehogs/2014.04.12_008_Nyasvizh_Mir_2._Lena.jpg',
+      url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849318/hedgehogs/2014.04.12_008_Nyasvizh_Mir_2._Lena.jpg',
     },
     {
       where: ['Hrodna', 'Grodno', 'Гродно', 'Гродна'],
@@ -115,8 +109,7 @@ export class Hardcode20190714 implements IDatabaseService {
       where: ['Biala Podlaska', 'Бяла-Подляска'],
       who: 'Max',
       when: '2015.01.31',
-      url:
-        'https://res.cloudinary.com/zinovik/image/upload/v1557849319/hedgehogs/2015.01.31_018_Biala_Podlaska._Max.jpg',
+      url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849319/hedgehogs/2015.01.31_018_Biala_Podlaska._Max.jpg',
     },
     {
       where: ['Brest', 'Брест', 'Брэст'],
@@ -188,8 +181,7 @@ export class Hardcode20190714 implements IDatabaseService {
       where: ['Saint Petersburg', 'Санкт-Петербург', 'Питер'],
       who: 'Roma and Lena',
       when: '2015.08.29',
-      url:
-        'https://res.cloudinary.com/zinovik/image/upload/v1557849323/hedgehogs/2015.08.29_030_Saint_Petersburg._Roma_and_Lena.jpg',
+      url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849323/hedgehogs/2015.08.29_030_Saint_Petersburg._Roma_and_Lena.jpg',
     },
     {
       where: ['Praha 1', 'Praga 1', 'Прага 1'],
@@ -279,8 +271,7 @@ export class Hardcode20190714 implements IDatabaseService {
       where: ['Watsonville', 'Уотсонвилл'],
       who: 'Sandra',
       when: '2017.01.11',
-      url:
-        'https://res.cloudinary.com/zinovik/image/upload/v1557849329/hedgehogs/2017.01.11_045_Watsonville._Sandra.jpg',
+      url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849329/hedgehogs/2017.01.11_045_Watsonville._Sandra.jpg',
     },
     {
       where: ['Brest', 'Брест', 'Брэст'],
@@ -298,8 +289,7 @@ export class Hardcode20190714 implements IDatabaseService {
       where: ['Saint Petersburg'],
       who: 'Lena',
       when: '2017.06.26',
-      url:
-        'https://res.cloudinary.com/zinovik/image/upload/v1557849330/hedgehogs/2017.06.26_048_Saint_Petersburg._Lena.jpg',
+      url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849330/hedgehogs/2017.06.26_048_Saint_Petersburg._Lena.jpg',
     },
     {
       where: ['Aarhus'],
@@ -311,8 +301,7 @@ export class Hardcode20190714 implements IDatabaseService {
       where: ['Brest', 'Брест', 'Брэст'],
       who: 'Santa Claus',
       when: '2018.01.01',
-      url:
-        'https://res.cloudinary.com/zinovik/image/upload/v1557849330/hedgehogs/2018.01.01_050_Brest._Santa_Claus.jpg',
+      url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849330/hedgehogs/2018.01.01_050_Brest._Santa_Claus.jpg',
     },
     {
       where: ['Vilnius', 'Вильнюс'],
@@ -342,8 +331,7 @@ export class Hardcode20190714 implements IDatabaseService {
       where: ['Warszawa', 'Warsaw', 'Варшава'],
       who: 'Sergey and Masha',
       when: '2018.09.20',
-      url:
-        'https://res.cloudinary.com/zinovik/image/upload/v1557849333/hedgehogs/2018.09.20_055_Warsaw._Sergey_and_Masha.jpg',
+      url: 'https://res.cloudinary.com/zinovik/image/upload/v1557849333/hedgehogs/2018.09.20_055_Warsaw._Sergey_and_Masha.jpg',
     },
     {
       where: ['Harelbeke'],
@@ -381,6 +369,12 @@ export class Hardcode20190714 implements IDatabaseService {
       when: '2019.07.14',
       url: 'https://res.cloudinary.com/zinovik/image/upload/v1563211536/hedgehogs/2019.07.14_061_Svityaz._Lena.jpg',
     },
+    {
+      where: ['Palanga', 'Lithuania', 'Litva', 'Паланга', 'Литва'],
+      who: 'Sergey and Masha',
+      when: '2019.07.21',
+      url: 'https://res.cloudinary.com/zinovik/image/upload/v1563774314/hedgehogs/2019.07.21_062_Palanga._Sergey_and_Masha.jpg',
+    },
   ];
 
   async getAllHedgehogs(): Promise<IHedgehog[]> {
@@ -389,7 +383,7 @@ export class Hardcode20190714 implements IDatabaseService {
     return this.mockHedgehogs.map(mockHedgehog => {
       return {
         ...mockHedgehog,
-        number: hedgehogNumber++,
+        hedgehogNumber: hedgehogNumber++,
       };
     });
   }

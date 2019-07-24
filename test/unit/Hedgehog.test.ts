@@ -106,15 +106,7 @@ describe('Hedgehog', () => {
       .verifiable(Times.once());
   }
 
-  function telegramServiceMockSendMessage({
-    text,
-    replyMarkup,
-    chatId,
-  }: {
-    text: string;
-    replyMarkup: string;
-    chatId: number;
-  }) {
+  function telegramServiceMockSendMessage({ text, replyMarkup, chatId }: { text: string; replyMarkup: string; chatId: number }) {
     telegramServiceMock
       .setup((x: ITelegramService) => x.sendMessage({ text, replyMarkup, chatId }))
       .returns(async () => undefined)
@@ -130,9 +122,7 @@ describe('Hedgehog', () => {
   }
 
   function languageServiceMockGetReplyMarkupNeverCalled() {
-    languageServiceMock
-      .setup((x: ILanguageService) => x.getReplyMarkup(It.isAny(), It.isAny()))
-      .verifiable(Times.never());
+    languageServiceMock.setup((x: ILanguageService) => x.getReplyMarkup(It.isAny(), It.isAny())).verifiable(Times.never());
   }
 
   function telegramServiceMockSendMessageNeverCalled() {
