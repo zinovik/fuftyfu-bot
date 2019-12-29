@@ -1,4 +1,4 @@
-// tslint:disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const googleSpreadsheet = require('google-spreadsheet');
 import { promisify } from 'util';
 
