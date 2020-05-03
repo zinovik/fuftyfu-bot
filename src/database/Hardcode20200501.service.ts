@@ -405,12 +405,24 @@ export class Hardcode20200123 implements IDatabaseService {
       when: '2020.01.10',
       url: 'https://res.cloudinary.com/zinovik/image/upload/v1578827227/hedgehogs/2020.01.10_067_Venice-Juliano._Natasha.jpg',
     },
+    {
+      where: ['Hand made', 'Сделан сам'],
+      who: 'Lena',
+      when: '2020.04.01',
+      url: 'https://res.cloudinary.com/zinovik/image/upload/v1585816370/hedgehogs/2020.04.01_068_Hand_Made._Lena.jpg',
+    },
+    {
+      where: ['Sula', 'Сула', 'Belarus', 'Беларусь'],
+      who: 'Lena',
+      when: '2020.05.01',
+      url: 'https://res.cloudinary.com/zinovik/image/upload/v1588524953/hedgehogs/2020.05.01_069_Sula._Lena.jpg',
+    },
   ];
 
   async getAllHedgehogs(): Promise<IHedgehog[]> {
     let hedgehogNumber = 1;
 
-    return this.mockHedgehogs.map(mockHedgehog => {
+    return this.mockHedgehogs.map((mockHedgehog) => {
       return {
         ...mockHedgehog,
         hedgehogNumber: hedgehogNumber++,
