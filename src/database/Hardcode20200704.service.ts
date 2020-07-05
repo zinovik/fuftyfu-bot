@@ -417,6 +417,12 @@ export class Hardcode20200123 implements IDatabaseService {
       when: '2020.05.01',
       url: 'https://res.cloudinary.com/zinovik/image/upload/v1588524953/hedgehogs/2020.05.01_069_Sula._Lena.jpg',
     },
+    {
+      where: ['Kamieniec', 'Kamenec', 'Камянец', 'Каменец', 'Belarus', 'Беларусь'],
+      who: 'Lena',
+      when: '2020.07.04',
+      url: 'https://res.cloudinary.com/zinovik/image/upload/v1593953186/hedgehogs/2020.07.04_070_Kamieniec._Lena.jpg',
+    },
   ];
 
   async getAllHedgehogs(): Promise<IHedgehog[]> {
