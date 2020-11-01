@@ -10,7 +10,7 @@ const PHRASES: { [key: string]: IPhrases } = { en, ru };
 export class LanguageService implements ILanguageService {
   async getReplyMarkup(languageCode: string, hedgehogsCount: number): Promise<string> {
     const phrases = this.getPhrases(languageCode);
-    const simpleCommandsButtons = phrases.simpleCommands.buttons.map(button => button.command);
+    const simpleCommandsButtons = phrases.simpleCommands.buttons.map((button) => button.command);
 
     const randomHedgehogNumber = this.getRandomHedgehogNumber(hedgehogsCount);
 
@@ -57,11 +57,11 @@ export class LanguageService implements ILanguageService {
     }
 
     // Check simple commands
-    if (phrases.simpleCommands.buttons.some(button => button.command === messageText)) {
-      return phrases.simpleCommands.buttons.find(button => button.command === messageText)!.answer;
+    if (phrases.simpleCommands.buttons.some((button) => button.command === messageText)) {
+      return phrases.simpleCommands.buttons.find((button) => button.command === messageText)!.answer;
     }
-    if (phrases.simpleCommands.rest.some(button => button.command === messageText)) {
-      return phrases.simpleCommands.rest.find(button => button.command === messageText)!.answer;
+    if (phrases.simpleCommands.rest.some((button) => button.command === messageText)) {
+      return phrases.simpleCommands.rest.find((button) => button.command === messageText)!.answer;
     }
 
     // Find hedgehogs
@@ -69,7 +69,7 @@ export class LanguageService implements ILanguageService {
       const findText = messageText.split(' ')[1];
 
       if (findText) {
-        const foundHedgehogs = hedgehogs.filter(hedgehog => hedgehog.where.some(where => where.toLowerCase().includes(findText)));
+        const foundHedgehogs = hedgehogs.filter((hedgehog) => hedgehog.where.some((where) => where.toLowerCase().includes(findText)));
 
         if (foundHedgehogs.length > 20) {
           return phrases.tooManyHedgehogsFoundAnswer;
