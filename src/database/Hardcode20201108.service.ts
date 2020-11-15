@@ -430,7 +430,7 @@ export class Hardcode20201108 implements IDatabaseService {
       url: 'https://res.cloudinary.com/zinovik/image/upload/v1603620988/hedgehogs/2020.10.23_071_Wildberries._Lena.jpg',
     },
     {
-      where: ['Tsum', 'ЦУМ', Brest', 'Брест', 'Брэст', 'Belarus', 'Беларусь'],
+      where: ['Tsum', 'ЦУМ', 'Brest', 'Брест', 'Брэст', 'Belarus', 'Беларусь'],
       who: 'Lena',
       when: '2020.11.08',
       url: 'https://res.cloudinary.com/zinovik/image/upload/v1604839317/hedgehogs/2020.11.08_072_Tsum._Lena.jpg',
