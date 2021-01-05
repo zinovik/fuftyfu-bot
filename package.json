@@ -8,7 +8,7 @@
     "npm": ">=6.9"
   },
   "dependencies": {
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "babel-polyfill": "^6.26.0",
     "dotenv": "^8.2.0",
     "google-spreadsheet": "^3.0.13"
