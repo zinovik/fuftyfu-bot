@@ -448,7 +448,7 @@ export class Hardcode20210802 implements IDatabaseService {
       url: 'https://res.cloudinary.com/zinovik/image/upload/v1628592181/hedgehogs/2021.07.27_074_Batumi._Lena.jpg',
     },
     {
-      where: ['Batumi', 'Батуми', 'Georgia', 'Грузия'],
+      where: ['Tbilisi', 'Тбилиси', 'Georgia', 'Грузия'],
       who: 'Lena',
       when: '2021.08.02',
       url: 'https://res.cloudinary.com/zinovik/image/upload/v1628592181/hedgehogs/2021.08.02_075_Tbilisi._Lena.jpg',
