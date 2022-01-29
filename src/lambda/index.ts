@@ -5,7 +5,7 @@ import * as dotenv from 'dotenv';
 import { ConfigParameterNotDefinedError } from './error/ConfigParameterNotDefinedError';
 import { Hedgehog } from '../hedgehog/Hedgehog';
 // import { GoogleSpreadsheetService } from '../database/GoogleSpreadsheet.service';
-import { Hardcode20210802 } from '../database/Hardcode20210802.service';
+import { Hardcode20220116 } from '../database/Hardcode20220116.service';
 import { LanguageService } from '../language/Language.service';
 import { TelegramService } from '../telegram/Telegram.service';
 import { IEvent } from './model/IEvent.interface';
@@ -26,7 +26,7 @@ exports.handler = async ({ body }: IEvent, context: never) => {
     throw new ConfigParameterNotDefinedError('GOOGLE_CLIENT_EMAIL');
   }
 
-  const hedgehog = new Hedgehog(new Hardcode20210802(), new LanguageService(), new TelegramService(process.env.TOKEN));
+  const hedgehog = new Hedgehog(new Hardcode20220116(), new LanguageService(), new TelegramService(process.env.TOKEN));
 
   try {
     await hedgehog.processMessage(body);

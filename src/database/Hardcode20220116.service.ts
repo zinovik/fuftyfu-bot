@@ -1,7 +1,7 @@
 import { IDatabaseService } from './IDatabaseService.interface';
 import { IHedgehog } from '../common/model/IHedgehog.interface';
 
-export class Hardcode20210802 implements IDatabaseService {
+export class Hardcode20220116 implements IDatabaseService {
   mockHedgehogs = [
     {
       where: ['Brest', 'Брест', 'Брэст', 'Belarus', 'Беларусь'],
@@ -452,6 +452,12 @@ export class Hardcode20210802 implements IDatabaseService {
       who: 'Lena',
       when: '2021.08.02',
       url: 'https://res.cloudinary.com/zinovik/image/upload/v1628592181/hedgehogs/2021.08.02_075_Tbilisi._Lena.jpg',
+    },
+    {
+      where: ['Galle', 'Галле', 'Sri Lanka', 'Шри-Ланка'],
+      who: 'Lena',
+      when: '2022.01.16',
+      url: 'https://res.cloudinary.com/zinovik/image/upload/v1643459060/hedgehogs/2022.01.16_076_Galle._Lena.jpg',
     },
   ];
 
