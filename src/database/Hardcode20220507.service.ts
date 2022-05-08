@@ -1,7 +1,7 @@
 import { IDatabaseService } from './IDatabaseService.interface';
 import { IHedgehog } from '../common/model/IHedgehog.interface';
 
-export class Hardcode20220116 implements IDatabaseService {
+export class Hardcode20220507 implements IDatabaseService {
   mockHedgehogs = [
     {
       where: ['Brest', 'Брест', 'Брэст', 'Belarus', 'Беларусь'],
@@ -459,16 +459,24 @@ export class Hardcode20220116 implements IDatabaseService {
       when: '2022.01.16',
       url: 'https://res.cloudinary.com/zinovik/image/upload/v1643459060/hedgehogs/2022.01.16_076_Galle._Lena.jpg',
     },
+    {
+      where: ['Tashkent,Ташкент,Uzbekistan,Узбекистан'],
+      who: 'Lena',
+      when: '2022.03.13',
+      url: 'https://res.cloudinary.com/zinovik/image/upload/v1652024670/hedgehogs/2022.05.07_078_Mensk._Lena.jpg',
+    },
+    {
+      where: ['Mensk,Minsk,Менск,Мiнск,Минск,Belarus,Беларусь'],
+      who: 'Lena',
+      when: '2022.05.07',
+      url: 'https://res.cloudinary.com/zinovik/image/upload/v1652024670/hedgehogs/2022.05.07_078_Mensk._Lena.jpg',
+    },
   ];
 
   async getAllHedgehogs(): Promise<IHedgehog[]> {
-    let hedgehogNumber = 1;
-
-    return this.mockHedgehogs.map((mockHedgehog) => {
-      return {
-        ...mockHedgehog,
-        hedgehogNumber: hedgehogNumber++,
-      };
-    });
+    return this.mockHedgehogs.map((mockHedgehog, index) => ({
+      ...mockHedgehog,
+      hedgehogNumber: index + 1,
+    }));
   }
 }
