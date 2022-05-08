@@ -463,7 +463,7 @@ export class Hardcode20220507 implements IDatabaseService {
       where: ['Tashkent,Ташкент,Uzbekistan,Узбекистан'],
       who: 'Lena',
       when: '2022.03.13',
-      url: 'https://res.cloudinary.com/zinovik/image/upload/v1652024670/hedgehogs/2022.05.07_078_Mensk._Lena.jpg',
+      url: 'https://res.cloudinary.com/zinovik/image/upload/v1652024670/hedgehogs/2022.03.13_077_Tashkent._Lena.jpg',
     },
     {
       where: ['Mensk,Minsk,Менск,Мiнск,Минск,Belarus,Беларусь'],
