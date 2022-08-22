@@ -6,7 +6,11 @@ import { IDatabaseService } from './IDatabaseService.interface';
 import { IHedgehog } from '../common/model/IHedgehog.interface';
 
 export class GoogleSpreadsheetService implements IDatabaseService {
-  constructor(private spreadsheetId: string, private googlePrivateKey: string, private googleClientEmail: string) {
+  private spreadsheetId: string;
+  private googlePrivateKey: string;
+  private googleClientEmail: string;
+
+  constructor(spreadsheetId: string, googlePrivateKey: string, googleClientEmail: string) {
     this.spreadsheetId = spreadsheetId;
     this.googlePrivateKey = googlePrivateKey;
     this.googleClientEmail = googleClientEmail;

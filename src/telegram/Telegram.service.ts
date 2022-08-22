@@ -5,7 +5,9 @@ import { ITelegramService } from './ITelegramService.interface';
 const TELEGRAM_API_URL = 'https://api.telegram.org/bot';
 
 export class TelegramService implements ITelegramService {
-  constructor(private token: string) {
+  private token: string;
+
+  constructor(token: string) {
     this.token = token;
   }
 
