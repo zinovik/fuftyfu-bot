@@ -33,7 +33,7 @@ exports.handler = async ({ body }: IEvent, context: never) => {
   try {
     await hedgehog.processMessage(body);
   } catch (error) {
-    console.error('Unexpected error occurred.', (error as any).message);
+    console.error('Unexpected error occurred.', error.message);
   }
 
   return {
