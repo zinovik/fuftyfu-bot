@@ -3,7 +3,7 @@ import { IDatabaseService } from './IDatabaseService.interface';
 import { IHedgehog } from '../common/model/IHedgehog.interface';
 
 export class Json implements IDatabaseService {
-  constructor(private readonly jsonUrl: string) {
+  constructor(readonly jsonUrl: string) {
     this.jsonUrl = jsonUrl;
   }
 
