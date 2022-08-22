@@ -15,6 +15,10 @@ export const ru: IPhrases = {
         command: 'фуфтыфу',
         answer: 'И тебе фуфтыфу, добрчеловек',
       },
+      {
+        command: 'карта',
+        answer: 'https://google.com/maps/d/viewer?mid=1LJuxi1tJ6TjEjPj0xLt7AeW8kZ9oPsw',
+      },
     ],
     rest: [
       {
@@ -29,7 +33,8 @@ export const ru: IPhrases = {
         3) Фуфтыфу
         4) Ёжик
         5) Номер ёжика в каталогизаторе ёжиков
-        6) искать брест`,
+        6) искать брест
+        7) карта`,
       },
     ],
   },

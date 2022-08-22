@@ -5,12 +5,14 @@ import * as dotenv from 'dotenv';
 import { ConfigParameterNotDefinedError } from './error/ConfigParameterNotDefinedError';
 import { Hedgehog } from '../hedgehog/Hedgehog';
 // import { GoogleSpreadsheetService } from '../database/GoogleSpreadsheet.service';
-import { Hardcode20220507 } from '../database/Hardcode20220507.service';
+import { Json } from '../database/Json.service';
 import { LanguageService } from '../language/Language.service';
 import { TelegramService } from '../telegram/Telegram.service';
 import { IEvent } from './model/IEvent.interface';
 
 dotenv.config();
+
+const JSON_URL = 'https://raw.githubusercontent.com/zinovik/fuftyfu-data/main/hedgehogs.json';
 
 exports.handler = async ({ body }: IEvent, context: never) => {
   if (process.env.TOKEN === undefined) {
@@ -26,7 +28,7 @@ exports.handler = async ({ body }: IEvent, context: never) => {
     throw new ConfigParameterNotDefinedError('GOOGLE_CLIENT_EMAIL');
   }
 
-  const hedgehog = new Hedgehog(new Hardcode20220507(), new LanguageService(), new TelegramService(process.env.TOKEN));
+  const hedgehog = new Hedgehog(new Json(JSON_URL), new LanguageService(), new TelegramService(process.env.TOKEN));
 
   try {
     await hedgehog.processMessage(body);
