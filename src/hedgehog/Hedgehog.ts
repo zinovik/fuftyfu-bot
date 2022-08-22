@@ -7,11 +7,7 @@ import { ITelegramService } from '../telegram/ITelegramService.interface';
 import { IMessageBody } from '../common/model/IMessageBody.interface';
 
 export class Hedgehog implements IHedgehogClass {
-  constructor(
-    private readonly databaseService: IDatabaseService,
-    private readonly languageService: ILanguageService,
-    private readonly telegramService: ITelegramService,
-  ) {
+  constructor(readonly databaseService: IDatabaseService, readonly languageService: ILanguageService, readonly telegramService: ITelegramService) {
     this.databaseService = databaseService;
     this.languageService = languageService;
     this.telegramService = telegramService;
