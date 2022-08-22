@@ -23,7 +23,7 @@ export class Hedgehog implements IHedgehogClass {
     try {
       messageParsed = JSON.parse(message);
     } catch (error) {
-      console.error('Error parsing user message: ', error.message);
+      console.error('Error parsing user message: ', (error as any).message);
       return false;
     }
 
@@ -42,7 +42,7 @@ export class Hedgehog implements IHedgehogClass {
     try {
       hedgehogs = await this.databaseService.getAllHedgehogs();
     } catch (error) {
-      console.error('Error getting hedgehogs from the database: ', error.message);
+      console.error('Error getting hedgehogs from the database: ', (error as any).message);
       return false;
     }
 
@@ -55,14 +55,14 @@ export class Hedgehog implements IHedgehogClass {
       text = await this.languageService.getText({ languageCode, messageText, firstName, hedgehogs });
       replyMarkup = await this.languageService.getReplyMarkup(languageCode, hedgehogsCount);
     } catch (error) {
-      console.error('Error getting bot answer: ', error.message);
+      console.error('Error getting bot answer: ', (error as any).message);
       return false;
     }
 
     try {
       await this.telegramService.sendMessage({ replyMarkup, text, chatId });
     } catch (error) {
-      console.error('Error sending telegram message: ', error.message);
+      console.error('Error sending telegram message: ', (error as any).message);
       return false;
     }
 

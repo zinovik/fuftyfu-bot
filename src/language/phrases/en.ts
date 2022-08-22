@@ -15,6 +15,10 @@ export const en: IPhrases = {
         command: 'fuftyfu',
         answer: 'Fuftyfu to you too, good man',
       },
+      {
+        command: 'map',
+        answer: 'https://google.com/maps/d/viewer?mid=1LJuxi1tJ6TjEjPj0xLt7AeW8kZ9oPsw',
+      },
     ],
     rest: [
       {
@@ -29,7 +33,8 @@ export const en: IPhrases = {
         3) Fuftyfu
         4) Hedgehog
         5) Hedgehog number in the hedgehogs cataloger
-        6) find brest`,
+        6) find brest
+        7) map`,
       },
     ],
   },
