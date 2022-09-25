@@ -107,7 +107,7 @@ export class LanguageService implements ILanguageService {
   private getHedgehog(languageCode: string, phrases: IPhrases, { id, when, photo, who, country, place, comment }: IHedgehog) {
     return `${phrases.hedgehogNumberAnswer}${id}.
 ${phrases.hedgehogWhereAnswer}${place[languageCode]}, ${country[languageCode]}${comment ? ` (${comment})` : ''}.
-${who}${phrases.hedgehogWhoWhenAnswer}${when}.
+${who[languageCode]}${phrases.hedgehogWhoWhenAnswer}${when}.
 
 ${photo}`;
   }
