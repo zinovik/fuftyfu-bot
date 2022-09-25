@@ -8,11 +8,8 @@ export class Json implements IDatabaseService {
   }
 
   async getAllHedgehogs(): Promise<IHedgehog[]> {
-    const { data: hedgehogs } = await axios.get<Omit<IHedgehog, 'hedgehogNumber'>[]>(this.jsonUrl);
+    const { data: hedgehogs } = await axios.get<IHedgehog[]>(this.jsonUrl);
 
-    return hedgehogs.map((hedgehog, index) => ({
-      ...hedgehog,
-      hedgehogNumber: index + 1,
-    }));
+    return hedgehogs;
   }
 }

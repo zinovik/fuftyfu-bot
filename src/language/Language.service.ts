@@ -40,7 +40,7 @@ export class LanguageService implements ILanguageService {
     if (phrases.randomHedgehogCommands.includes(messageText)) {
       const randomHedgehogNumber = this.getRandomHedgehogNumber(hedgehogs.length);
 
-      return this.getHedgehog(phrases, hedgehogs[randomHedgehogNumber - 1]);
+      return this.getHedgehog(languageCode, phrases, hedgehogs[randomHedgehogNumber - 1]);
     }
 
     // Check hedgehog number
@@ -48,7 +48,7 @@ export class LanguageService implements ILanguageService {
 
     if (hedgehogNumber) {
       if (hedgehogNumber >= 1 && hedgehogNumber <= Number(hedgehogs.length)) {
-        return this.getHedgehog(phrases, hedgehogs[hedgehogNumber - 1]);
+        return this.getHedgehog(languageCode, phrases, hedgehogs[hedgehogNumber - 1]);
       }
 
       if (hedgehogNumber > hedgehogs.length) {
@@ -69,7 +69,13 @@ export class LanguageService implements ILanguageService {
       const findText = messageText.split(' ')[1];
 
       if (findText) {
-        const foundHedgehogs = hedgehogs.filter((hedgehog) => hedgehog.where.some((where) => where.toLowerCase().includes(findText)));
+        const foundHedgehogs = hedgehogs.filter(({ country, place, comment }) => {
+          return (
+            Object.keys(country).some((lang) => country[lang].toLowerCase().includes(findText)) ||
+            Object.keys(place).some((lang) => place[lang].toLowerCase().includes(findText)) ||
+            (comment && Object.keys(comment).some((lang) => comment[lang].toLowerCase().includes(findText)))
+          );
+        });
 
         if (foundHedgehogs.length > 20) {
           return phrases.tooManyHedgehogsFoundAnswer;
@@ -77,7 +83,7 @@ export class LanguageService implements ILanguageService {
 
         if (foundHedgehogs.length) {
           return foundHedgehogs.reduce(
-            (foundHedgehogsAnswer, hedgehog) => `${foundHedgehogsAnswer}\n\n---\n\n${this.getHedgehog(phrases, hedgehog)}`,
+            (foundHedgehogsAnswer, hedgehog) => `${foundHedgehogsAnswer}\n\n---\n\n${this.getHedgehog(languageCode, phrases, hedgehog)}`,
             '',
           );
         }
@@ -98,11 +104,11 @@ export class LanguageService implements ILanguageService {
     return Math.floor(Math.random() * Number(hedgehogsCount)) + 1;
   }
 
-  private getHedgehog(phrases: IPhrases, { hedgehogNumber, url, where, who, when }: IHedgehog) {
-    return `${phrases.hedgehogNumberAnswer}${hedgehogNumber}.
-${phrases.hedgehogWhereAnswer}${where[0]}.
+  private getHedgehog(languageCode: string, phrases: IPhrases, { id, when, photo, who, country, place, comment }: IHedgehog) {
+    return `${phrases.hedgehogNumberAnswer}${id}.
+${phrases.hedgehogWhereAnswer}${place[languageCode]}, ${country[languageCode]}${comment ? ` (${comment})` : ''}.
 ${who}${phrases.hedgehogWhoWhenAnswer}${when}.
 
-${url}`;
+${photo}`;
   }
 }
