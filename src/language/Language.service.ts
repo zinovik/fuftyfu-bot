@@ -99,11 +99,10 @@ export class LanguageService implements ILanguageService {
   }
 
   private getHedgehog(phrases: IPhrases, { hedgehogNumber, url, where, who, when }: IHedgehog) {
-    return `${phrases.hedgehogNumberAnswerStart}${hedgehogNumber}${phrases.hedgehogNumberAnswerMiddle}${url}
+    return `${phrases.hedgehogNumberAnswer}${hedgehogNumber}.
+${phrases.hedgehogWhereAnswer}${where[0]}.
+${who}${phrases.hedgehogWhoAnswer}${when}.
 
-    ${phrases.hedgehogInfoAnswer}
-    ${phrases.hedgehogWhereAnswer}${where[0]}
-    ${phrases.hedgehogWhoAnswer}${who}
-    ${phrases.hedgehogWhenAnswer}${when}`;
+${url}`;
   }
 }
