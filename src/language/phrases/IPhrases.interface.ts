@@ -12,12 +12,9 @@ export interface IPhrases {
   findCommand: string;
   findExample: string;
   randomHedgehogCommands: string[];
-  hedgehogNumberAnswerStart: string;
-  hedgehogNumberAnswerMiddle: string;
-  hedgehogInfoAnswer: string;
+  hedgehogNumberAnswer: string;
   hedgehogWhereAnswer: string;
   hedgehogWhoAnswer: string;
-  hedgehogWhenAnswer: string;
   maxCountAnswerStart: string;
   maxCountAnswerEnd: string;
   hedgehogsFoundCountAnswer: string;
