@@ -32,7 +32,7 @@ export const en: IPhrases = {
         2) Fufty
         3) Fuftyfu
         4) Hedgehog
-        5) Hedgehog number in the hedgehogs cataloger
+        5) <hedgehog number in the hedgehogs cataloger>
         6) find brest
         7) map`,
       },
@@ -41,9 +41,9 @@ export const en: IPhrases = {
   findCommand: 'find',
   findExample: 'brest',
   randomHedgehogCommands: ['hedgehog'],
-  hedgehogNumberAnswer: 'Hi, I am hedgehog №',
+  hedgehogNumberAnswer: 'Hi 👋, I am hedgehog №',
   hedgehogWhereAnswer: 'I was born in ',
-  hedgehogWhoAnswer: ' brought me at ',
+  hedgehogWhoWhenAnswer: ' brought me at ',
   maxCountAnswerStart: "I don't have that many hedgehogs yet :( I have only ",
   maxCountAnswerEnd: ' fuftyhedgehogs (=',
   hedgehogsFoundCountAnswer: 'Total found hedgehogs: ',
