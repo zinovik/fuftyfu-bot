@@ -44,7 +44,7 @@ export const en: IPhrases = {
   hedgehogNumberAnswer: 'Hi, I am hedgehog №',
   hedgehogWhereAnswer: 'I was born in ',
   hedgehogWhoAnswer: ' brought me ',
-  maxCountAnswerStart: "I don't have so many hedgehogs yet :( I have only ",
+  maxCountAnswerStart: "I don't have that many hedgehogs yet :( I have only ",
   maxCountAnswerEnd: ' fuftyhedgehogs (=',
   hedgehogsFoundCountAnswer: 'Total found hedgehogs: ',
   hedgehogNotFoundAnswerStart: 'I have no hedgehog from ',
