@@ -41,7 +41,7 @@ export const ru: IPhrases = {
   findCommand: 'искать',
   findExample: 'брест',
   randomHedgehogCommands: ['ёжик', 'ежик'],
-  hedgehogNumberAnswer: 'Привет 👋, я ёжик №',
+  hedgehogNumberAnswer: 'Привет 👋, я 🦔 ёжик №',
   hedgehogWhereAnswer: 'Моя родина - ',
   hedgehogWhoWhenAnswer: ' привёз меня ',
   maxCountAnswerStart: 'Столько ёжиков у меня пока нет :( Есть только ',

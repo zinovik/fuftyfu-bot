@@ -41,7 +41,7 @@ export const en: IPhrases = {
   findCommand: 'find',
   findExample: 'brest',
   randomHedgehogCommands: ['hedgehog'],
-  hedgehogNumberAnswer: 'Hi 👋, I am hedgehog №',
+  hedgehogNumberAnswer: 'Hi 👋, I am 🦔 hedgehog №',
   hedgehogWhereAnswer: 'I was born in ',
   hedgehogWhoWhenAnswer: ' brought me at ',
   maxCountAnswerStart: "I don't have that many hedgehogs yet :( I have only ",
