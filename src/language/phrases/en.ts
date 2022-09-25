@@ -43,7 +43,7 @@ export const en: IPhrases = {
   randomHedgehogCommands: ['hedgehog'],
   hedgehogNumberAnswer: 'Hi, I am hedgehog №',
   hedgehogWhereAnswer: 'I was born in ',
-  hedgehogWhoAnswer: ' brought me ',
+  hedgehogWhoAnswer: ' brought me at ',
   maxCountAnswerStart: "I don't have that many hedgehogs yet :( I have only ",
   maxCountAnswerEnd: ' fuftyhedgehogs (=',
   hedgehogsFoundCountAnswer: 'Total found hedgehogs: ',
