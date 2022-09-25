@@ -14,7 +14,7 @@ export interface IPhrases {
   randomHedgehogCommands: string[];
   hedgehogNumberAnswer: string;
   hedgehogWhereAnswer: string;
-  hedgehogWhoAnswer: string;
+  hedgehogWhoWhenAnswer: string;
   maxCountAnswerStart: string;
   maxCountAnswerEnd: string;
   hedgehogsFoundCountAnswer: string;
