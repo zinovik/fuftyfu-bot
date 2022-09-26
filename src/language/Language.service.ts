@@ -69,11 +69,12 @@ export class LanguageService implements ILanguageService {
       const findText = messageText.split(' ')[1];
 
       if (findText) {
-        const foundHedgehogs = hedgehogs.filter(({ country, place, comment }) => {
+        const foundHedgehogs = hedgehogs.filter(({ country, place, comment, who }) => {
           return (
             Object.keys(country).some((lang) => country[lang].toLowerCase().includes(findText)) ||
             Object.keys(place).some((lang) => place[lang].toLowerCase().includes(findText)) ||
-            (comment && Object.keys(comment).some((lang) => comment[lang].toLowerCase().includes(findText)))
+            (comment && Object.keys(comment).some((lang) => comment[lang].toLowerCase().includes(findText))) ||
+            Object.keys(who).some((lang) => who[lang].toLowerCase().includes(findText))
           );
         });
 
