@@ -83,10 +83,7 @@ export class LanguageService implements ILanguageService {
         }
 
         if (foundHedgehogs.length) {
-          return foundHedgehogs.reduce(
-            (foundHedgehogsAnswer, hedgehog) => `${foundHedgehogsAnswer}\n\n---\n\n${this.getHedgehog(languageCode, phrases, hedgehog)}`,
-            '',
-          );
+          return foundHedgehogs.join('\n\n---\n\n');
         }
 
         return `${phrases.hedgehogNotFoundAnswerStart}${findText}${phrases.hedgehogNotFoundAnswerEnd}`;
