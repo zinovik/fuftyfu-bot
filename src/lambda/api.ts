@@ -22,7 +22,10 @@ exports.handler = async ({ queryStringParameters }: IEvent, context: never) => {
 
   return {
     statusCode: 200,
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
     body: JSON.stringify({
       total: hedgehogs.length,
       filtered: hedgehogsFiltered.length,
