@@ -7,6 +7,7 @@ exports.handler = async ({ queryStringParameters }: IEvent, context: never) => {
   const limit = Number(queryStringParameters.limit) || 10;
   const offset = Number(queryStringParameters.offset) || 0;
   const filter = queryStringParameters.filter || '';
+  const isCors = queryStringParameters.cors === 'true';
 
   const json = new Json(JSON_URL);
   const hedgehogs = await json.getAllHedgehogs();
@@ -24,8 +25,11 @@ exports.handler = async ({ queryStringParameters }: IEvent, context: never) => {
     statusCode: 200,
     headers: {
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+      ...(isCors
+        ? {
+            'Access-Control-Allow-Origin': '*',
+          }
+        : {}),
     },
     body: JSON.stringify({
       total: hedgehogs.length,
