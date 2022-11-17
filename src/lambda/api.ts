@@ -37,7 +37,7 @@ exports.handler = async ({ path, queryStringParameters }: IEvent, context: never
   const json = new Json(JSON_URL);
   const hedgehogs = await json.getAllHedgehogs();
 
-  if (path.startsWith('/api/hedgehog/')) {
+  if (path.includes('/api/hedgehog/')) {
     const id = Number(path.replace('/api/hedgehog/', '')) - 1;
 
     return hedgehogs[id] ? getResponse(200, hedgehogs[id], isCors) : getResponse(404, { result: 'not found' }, isCors);
