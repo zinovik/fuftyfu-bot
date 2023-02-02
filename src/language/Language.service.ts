@@ -102,11 +102,11 @@ export class LanguageService implements ILanguageService {
     return Math.floor(Math.random() * Number(hedgehogsCount)) + 1;
   }
 
-  private getHedgehog(languageCode: string, phrases: IPhrases, { id, when, photo, who, country, place, comment }: IHedgehog) {
+  private getHedgehog(languageCode: string, phrases: IPhrases, { id, when, photos, who, country, place, comment }: IHedgehog) {
     return `${phrases.hedgehogNumberAnswer}${id}.
 ${phrases.hedgehogWhereAnswer}${place[languageCode]}${comment ? ` (${comment[languageCode]})` : ''}, ${country[languageCode]}.
 ${who[languageCode]}${phrases.hedgehogWhoWhenAnswer}${when}.
 
-${photo}`;
+${photos.join('\n\n')}`;
   }
 }

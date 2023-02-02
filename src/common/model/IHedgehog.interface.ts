@@ -1,7 +1,7 @@
 export interface IHedgehog {
   id: number;
   when: string;
-  photo: string;
+  photos: string[];
   who: {
     [language: string]: string;
   };
