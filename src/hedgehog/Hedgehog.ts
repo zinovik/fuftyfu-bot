@@ -2,7 +2,7 @@ import { IHedgehogClass } from './IHedgehogClass.interface';
 import { IHedgehog } from '../common/model/IHedgehog.interface';
 import { IDatabaseService } from '../database/IDatabaseService.interface';
 import { ILanguageService } from '../language/ILanguageService.interface';
-import { ITelegramService } from '../telegram/ITelegramService.interface';
+import { IMessengerService } from '../messenger/IMessengerService.interface';
 
 import { IMessageBody } from '../common/model/IMessageBody.interface';
 
@@ -10,11 +10,11 @@ export class Hedgehog implements IHedgehogClass {
   constructor(
     private readonly databaseService: IDatabaseService,
     private readonly languageService: ILanguageService,
-    private readonly telegramService: ITelegramService,
+    private readonly messengerService: IMessengerService,
   ) {
     this.databaseService = databaseService;
     this.languageService = languageService;
-    this.telegramService = telegramService;
+    this.messengerService = messengerService;
   }
 
   async processMessage(message: string): Promise<boolean> {
@@ -60,9 +60,9 @@ export class Hedgehog implements IHedgehogClass {
     }
 
     try {
-      await this.telegramService.sendMessage({ replyMarkup, text, chatId });
+      await this.messengerService.sendMessage({ replyMarkup, text, chatId });
     } catch (error) {
-      console.error('Error sending telegram message: ', (error as any).message);
+      console.error('Error sending telegram message: ', (error as any).response.data.description);
       return false;
     }
 

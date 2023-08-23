@@ -3,29 +3,29 @@ import { IMock, Mock, It, Times } from 'typemoq';
 import { Hedgehog } from '../../src/hedgehog/Hedgehog';
 import { IDatabaseService } from '../../src/database/IDatabaseService.interface';
 import { ILanguageService } from '../../src/language/ILanguageService.interface';
-import { ITelegramService } from '../../src/telegram/ITelegramService.interface';
+import { IMessengerService } from '../../src/messenger/IMessengerService.interface';
 
 import { IHedgehog } from '../../src/common/model/IHedgehog.interface';
 
 describe('Hedgehog', () => {
   let databaseServiceMock: IMock<IDatabaseService>;
   let languageServiceMock: IMock<ILanguageService>;
-  let telegramServiceMock: IMock<ITelegramService>;
+  let messengerServiceMock: IMock<IMessengerService>;
 
   let hedgehog: Hedgehog;
 
   beforeEach(() => {
     databaseServiceMock = Mock.ofType<IDatabaseService>();
     languageServiceMock = Mock.ofType<ILanguageService>();
-    telegramServiceMock = Mock.ofType<ITelegramService>();
+    messengerServiceMock = Mock.ofType<IMessengerService>();
 
-    hedgehog = new Hedgehog(databaseServiceMock.object, languageServiceMock.object, telegramServiceMock.object);
+    hedgehog = new Hedgehog(databaseServiceMock.object, languageServiceMock.object, messengerServiceMock.object);
   });
 
   afterEach(() => {
     databaseServiceMock.verifyAll();
     languageServiceMock.verifyAll();
-    telegramServiceMock.verifyAll();
+    messengerServiceMock.verifyAll();
   });
 
   it('Should stop working if there is an invalid body', async () => {
@@ -34,7 +34,7 @@ describe('Hedgehog', () => {
     databaseServiceMockGetAllHedgehogsNeverCalled();
     languageServiceMockGetTextNeverCalled();
     languageServiceMockGetReplyMarkupNeverCalled();
-    telegramServiceMockSendMessageNeverCalled();
+    messengerServiceMockSendMessageNeverCalled();
 
     // Act
     await hedgehog.processMessage(body);
@@ -56,7 +56,7 @@ describe('Hedgehog', () => {
     databaseServiceMockGetAllHedgehogs(hedgehogs);
     languageServiceMockGetText({ languageCode, messageText, firstName, hedgehogs }, mockText);
     languageServiceMockGetReplyMarkup(languageCode, hedgehogs.length, mockReplyMarkup);
-    telegramServiceMockSendMessage({ text: mockText, replyMarkup: mockReplyMarkup, chatId: id });
+    messengerServiceMockSendMessage({ text: mockText, replyMarkup: mockReplyMarkup, chatId: id });
 
     // Act
     await hedgehog.processMessage(body);
@@ -106,9 +106,9 @@ describe('Hedgehog', () => {
       .verifiable(Times.once());
   }
 
-  function telegramServiceMockSendMessage({ text, replyMarkup, chatId }: { text: string; replyMarkup: string; chatId: number }) {
-    telegramServiceMock
-      .setup((x: ITelegramService) => x.sendMessage({ text, replyMarkup, chatId }))
+  function messengerServiceMockSendMessage({ text, replyMarkup, chatId }: { text: string; replyMarkup: string; chatId: number }) {
+    messengerServiceMock
+      .setup((x: IMessengerService) => x.sendMessage({ text, replyMarkup, chatId }))
       .returns(async () => undefined)
       .verifiable(Times.once());
   }
@@ -125,7 +125,7 @@ describe('Hedgehog', () => {
     languageServiceMock.setup((x: ILanguageService) => x.getReplyMarkup(It.isAny(), It.isAny())).verifiable(Times.never());
   }
 
-  function telegramServiceMockSendMessageNeverCalled() {
-    telegramServiceMock.setup((x: ITelegramService) => x.sendMessage(It.isAny())).verifiable(Times.never());
+  function messengerServiceMockSendMessageNeverCalled() {
+    messengerServiceMock.setup((x: IMessengerService) => x.sendMessage(It.isAny())).verifiable(Times.never());
   }
 });

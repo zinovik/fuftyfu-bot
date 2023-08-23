@@ -4,10 +4,9 @@ import * as dotenv from 'dotenv';
 
 import { ConfigParameterNotDefinedError } from './error/ConfigParameterNotDefinedError';
 import { Hedgehog } from '../hedgehog/Hedgehog';
-// import { GoogleSpreadsheetService } from '../database/GoogleSpreadsheet.service';
 import { Json } from '../database/Json.service';
 import { LanguageService } from '../language/Language.service';
-import { TelegramService } from '../telegram/Telegram.service';
+import { TelegramService } from '../messenger/Telegram.service';
 import { IEvent } from './model/IEvent.interface';
 
 dotenv.config();
@@ -30,17 +29,20 @@ exports.handler = async ({ body }: IEvent, context: never) => {
 
   const hedgehog = new Hedgehog(new Json(JSON_URL), new LanguageService(), new TelegramService(process.env.TOKEN));
 
+  let isSuccess;
+
   try {
-    await hedgehog.processMessage(body);
+    isSuccess = await hedgehog.processMessage(body);
   } catch (error) {
-    console.error('Unexpected error occurred.', error.message);
+    isSuccess = false;
+    console.error('Unexpected error occurred.', (error as any).message);
   }
 
   return {
     statusCode: 200,
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      result: 'success',
+      result: isSuccess ? 'success' : 'error',
     }),
   };
 };

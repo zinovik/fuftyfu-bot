@@ -13,7 +13,7 @@ docker-compose up
 ```
 or
 ```bash
-npm run start:lambda
+NODE_OPTIONS=--openssl-legacy-provider npm run start:lambda
 ```
 
 3. setup bot
@@ -22,6 +22,23 @@ npm run start:lambda
 ```
 
 **testing**
+
+```bash
+curl --location 'localhost:9000/.netlify/functions/index' \
+--header 'Content-Type: application/json' \
+--data '{
+    "message": {
+        "from": {
+            "first_name": "max",
+            "language_code": "en"
+        },
+        "chat": {
+            "id": "446618160"
+        },
+        "text": "find brest"
+    }
+}'
+```
 
 ```bash
  curl https://api.telegram.org/bot<TOKEN>/setWebhook?url=https://<NGROK ID>.ngrok.io/index

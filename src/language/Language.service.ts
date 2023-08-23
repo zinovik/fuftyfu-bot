@@ -78,7 +78,7 @@ export class LanguageService implements ILanguageService {
           );
         });
 
-        if (foundHedgehogs.length > 20) {
+        if (foundHedgehogs.length > 16) {
           return phrases.tooManyHedgehogsFoundAnswer;
         }
 
