@@ -1,3 +1,5 @@
+import { IMessageBody } from '../common/model/IMessageBody.interface';
+
 export interface IHedgehogClass {
-  processMessage(message: string): Promise<boolean>;
+    processMessage(message: IMessageBody): Promise<boolean>;
 }

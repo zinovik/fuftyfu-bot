@@ -16,4 +16,4 @@ COPY tsconfig.json ./
 COPY .eslintrc ./
 
 # Build and run the app
-CMD npm run start:lambda
+CMD npm run dev

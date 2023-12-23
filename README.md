@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/zinovik/fuftyfu-bot.svg?branch=master)](https://travis-ci.org/zinovik/fuftyfu-bot)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/875db5e2-3246-4680-ad42-7bb637fff095/deploy-status)](https://app.netlify.com/sites/fuftyfu-bot/deploys)
 
 ![logo](./avatar/fuftyfubot.jpg)
 
@@ -18,13 +16,13 @@ NODE_OPTIONS=--openssl-legacy-provider npm run start:lambda
 
 3. setup bot
 ```bash
- curl https://api.telegram.org/bot<TOKEN>/setWebhook?url=https://fuftyfu-bot.netlify.com/.netlify/functions/index
+curl https://api.telegram.org/bot<TOKEN>/setWebhook?url=https://us-central1-zinovik-project.cloudfunctions.net/fuftyfu-bot
 ```
 
 **testing**
 
 ```bash
-curl --location 'localhost:9000/.netlify/functions/index' \
+curl --location 'localhost:8080' \
 --header 'Content-Type: application/json' \
 --data '{
     "message": {
@@ -41,6 +39,6 @@ curl --location 'localhost:9000/.netlify/functions/index' \
 ```
 
 ```bash
- curl https://api.telegram.org/bot<TOKEN>/setWebhook?url=https://<NGROK ID>.ngrok.io/index
+curl https://api.telegram.org/bot<TOKEN>/setWebhook?url=https://<NGROK ID>.ngrok.io/index
 ~/ngrok http 9000
 ```
