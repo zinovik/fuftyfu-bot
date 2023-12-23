@@ -18,6 +18,11 @@ export class Hedgehog implements IHedgehogClass {
     }
 
     async processMessage(message: IMessageBody): Promise<boolean> {
+        if (!message.message) {
+            console.error(`Bad User Input: ${message}`);
+            return false;
+        }
+
         const {
             message: {
                 text: messageTextDirty,

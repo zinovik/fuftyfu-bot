@@ -56,11 +56,11 @@ describe('Hedgehog', () => {
         const id = 123456789;
         const body: IMessageBody = {
             message: {
-                text: '${messageText}',
+                text: messageText,
                 chat: { id: id },
                 from: {
-                    language_code: '${languageCode}',
-                    first_name: '${firstName}',
+                    language_code: languageCode,
+                    first_name: firstName,
                 },
             },
         } as IMessageBody;
