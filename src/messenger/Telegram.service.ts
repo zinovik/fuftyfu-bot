@@ -25,6 +25,7 @@ export class TelegramService implements IMessengerService {
                 text: chunk,
                 reply_markup: replyMarkup,
                 chat_id: chatId,
+                parse_mode: 'Markdown',
             };
 
             try {
