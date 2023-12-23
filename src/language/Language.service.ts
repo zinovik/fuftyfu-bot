@@ -163,7 +163,6 @@ ${phrases.hedgehogWhereAnswer}${place[languageCode]}${
             comment ? ` (${comment[languageCode]})` : ''
         }, ${country[languageCode]}.
 ${who[languageCode]}${phrases.hedgehogWhoWhenAnswer}${when}.
-
-${photos.map((photo, i) => `[photo ${i}](${photo})`).join(' | ')}`;
+${photos.map((photo, i) => `[photo ${i + 1}](${photo})`).join(', ')}`;
     }
 }
