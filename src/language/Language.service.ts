@@ -164,6 +164,6 @@ ${phrases.hedgehogWhereAnswer}${place[languageCode]}${
         }, ${country[languageCode]}.
 ${who[languageCode]}${phrases.hedgehogWhoWhenAnswer}${when}.
 
-${photos.join('\n\n')}`;
+${photos.map((photo, i) => `[photo ${i}](${photo})`).join(' | ')}`;
     }
 }

@@ -43,7 +43,7 @@ export class TelegramService implements IMessengerService {
                     )}`
                 );
             } catch (error) {
-                console.log('Error sending Telegram message', error);
+                console.error('Error sending Telegram message', error);
             }
         }
     }
