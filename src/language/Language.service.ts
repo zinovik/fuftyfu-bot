@@ -134,7 +134,7 @@ export class LanguageService implements ILanguageService {
                         .map((hedgehog) =>
                             this.getHedgehog(languageCode, phrases, hedgehog)
                         )
-                        .join('\n\n---\n\n');
+                        .join('\n\n');
                 }
 
                 return `${phrases.hedgehogNotFoundAnswerStart}${findText}${phrases.hedgehogNotFoundAnswerEnd}`;

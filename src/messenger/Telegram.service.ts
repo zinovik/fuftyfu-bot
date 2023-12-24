@@ -50,6 +50,8 @@ export class TelegramService implements IMessengerService {
     }
 
     private stringToChunks(str: string, size: number): string[] {
+        const SEPARATOR = '\n\n';
+
         const chunks: string[] = [];
 
         let restOfTheStr = str;
@@ -63,7 +65,7 @@ export class TelegramService implements IMessengerService {
 
             const lastNewLineIndexInChunk = restOfTheStr
                 .substring(0, size)
-                .lastIndexOf('---');
+                .lastIndexOf(SEPARATOR);
 
             chunks.push(
                 restOfTheStr.substring(
@@ -76,7 +78,7 @@ export class TelegramService implements IMessengerService {
             restOfTheStr = restOfTheStr.substring(
                 lastNewLineIndexInChunk === -1
                     ? size
-                    : lastNewLineIndexInChunk + 1
+                    : lastNewLineIndexInChunk + SEPARATOR.length
             );
         }
 
