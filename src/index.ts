@@ -1,4 +1,3 @@
-import * as dotenv from 'dotenv';
 import * as functions from '@google-cloud/functions-framework';
 import { ConfigParameterNotDefinedError } from './error/ConfigParameterNotDefinedError';
 import { Hedgehog } from './hedgehog/Hedgehog';
