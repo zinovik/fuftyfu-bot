@@ -63,7 +63,7 @@ export class TelegramService implements IMessengerService {
 
             const lastNewLineIndexInChunk = restOfTheStr
                 .substring(0, size)
-                .lastIndexOf('\n');
+                .lastIndexOf('---');
 
             chunks.push(
                 restOfTheStr.substring(

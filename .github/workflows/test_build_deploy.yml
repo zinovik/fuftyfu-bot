@@ -37,3 +37,5 @@ jobs:
         run: echo "${{ secrets.ENV }}" | base64 -d >> env.yaml
       - name: Build and Deploy
         run: npm run deploy
+      - name: Remove env.yaml
+        run: rm env.yaml
