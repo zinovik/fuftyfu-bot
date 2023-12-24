@@ -17,15 +17,13 @@ export class TelegramService implements IMessengerService {
         text: chunk,
         reply_markup: replyMarkup,
         chat_id: chatId,
+        parse_mode: 'Markdown',
       };
 
       try {
         console.log(`Sending telegram message: ${JSON.stringify(message)}...`);
 
-        const { data } = await axios.post(
-          `${TELEGRAM_API_URL}${this.token}/sendMessage`,
-          message,
-        );
+        const { data } = await axios.post(`${TELEGRAM_API_URL}${this.token}/sendMessage`, message);
 
         console.log(`Telegram message was successfully sent: ${JSON.stringify(data)}`);
       } catch (error) {
@@ -35,12 +33,23 @@ export class TelegramService implements IMessengerService {
   }
 
   private stringToChunks(str: string, size: number): string[] {
+    const SEPARATOR = '\n\n';
+
     const chunks: string[] = [];
 
-    const chunksNumber = Math.ceil(str.length / size);
+    let restOfTheStr = str;
 
-    for (let i = 0; i < chunksNumber; i++) {
-      chunks.push(str.substring(i * size, (i + 1) * size));
+    while (restOfTheStr.length > 0) {
+      if (restOfTheStr.length <= size) {
+        chunks.push(restOfTheStr);
+        restOfTheStr = '';
+        break;
+      }
+
+      const lastNewLineIndexInChunk = restOfTheStr.substring(0, size).lastIndexOf(SEPARATOR);
+
+      chunks.push(restOfTheStr.substring(0, lastNewLineIndexInChunk === -1 ? size : lastNewLineIndexInChunk));
+      restOfTheStr = restOfTheStr.substring(lastNewLineIndexInChunk === -1 ? size : lastNewLineIndexInChunk + SEPARATOR.length);
     }
 
     return chunks;

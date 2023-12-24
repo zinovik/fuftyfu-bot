@@ -83,7 +83,7 @@ export class LanguageService implements ILanguageService {
         }
 
         if (foundHedgehogs.length) {
-          return foundHedgehogs.map((hedgehog) => this.getHedgehog(languageCode, phrases, hedgehog)).join('\n\n---\n\n');
+          return foundHedgehogs.map((hedgehog) => this.getHedgehog(languageCode, phrases, hedgehog)).join('\n\n');
         }
 
         return `${phrases.hedgehogNotFoundAnswerStart}${findText}${phrases.hedgehogNotFoundAnswerEnd}`;
@@ -106,7 +106,6 @@ export class LanguageService implements ILanguageService {
     return `${phrases.hedgehogNumberAnswer}${id}.
 ${phrases.hedgehogWhereAnswer}${place[languageCode]}${comment ? ` (${comment[languageCode]})` : ''}, ${country[languageCode]}.
 ${who[languageCode]}${phrases.hedgehogWhoWhenAnswer}${when}.
-
-${photos.join('\n\n')}`;
+${photos.map((photo, i) => `[photo ${i + 1}](${photo})`).join(', ')}`;
   }
 }
