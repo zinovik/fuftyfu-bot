@@ -9,6 +9,8 @@ const JSON_URL =
     'https://raw.githubusercontent.com/zinovik/fuftyfu-data/main/hedgehogs.json';
 
 functions.http('main', async (req, res) => {
+    console.log('Triggered!');
+
     if (process.env.TELEGRAM_TOKEN === undefined) {
         throw new ConfigParameterNotDefinedError('TELEGRAM_TOKEN');
     }
@@ -19,16 +21,11 @@ functions.http('main', async (req, res) => {
         new TelegramService(process.env.TELEGRAM_TOKEN)
     );
 
-    let isSuccess;
+    await hedgehog.processMessage(req.body);
 
-    try {
-        isSuccess = await hedgehog.processMessage(req.body);
-    } catch (error) {
-        isSuccess = false;
-        console.error('Unexpected error occurred.', (error as any).message);
-    }
+    console.log('Done!');
 
     res.status(200).json({
-        result: isSuccess ? 'success' : 'error',
+        result: 'success',
     });
 });

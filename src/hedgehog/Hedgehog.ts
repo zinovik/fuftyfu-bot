@@ -17,10 +17,9 @@ export class Hedgehog implements IHedgehogClass {
         this.messengerService = messengerService;
     }
 
-    async processMessage(message: IMessageBody): Promise<boolean> {
+    async processMessage(message: IMessageBody): Promise<void> {
         if (!message.message) {
-            console.error(`Bad User Input: ${message}`);
-            return false;
+            throw new Error(`Bad User Input: ${message}`);
         }
 
         const {
@@ -33,53 +32,27 @@ export class Hedgehog implements IHedgehogClass {
 
         const messageText = messageTextDirty.trim().toLowerCase();
 
-        let hedgehogs: IHedgehog[] = [];
-
-        try {
-            hedgehogs = await this.databaseService.getAllHedgehogs();
-        } catch (error) {
-            console.error(
-                'Error getting hedgehogs from the database: ',
-                (error as any).message
-            );
-            return false;
-        }
+        const hedgehogs: IHedgehog[] =
+            await this.databaseService.getAllHedgehogs();
 
         const hedgehogsCount = hedgehogs.length;
 
-        let text = '';
-        let replyMarkup = '';
+        const text = await this.languageService.getText({
+            languageCode,
+            messageText,
+            firstName,
+            hedgehogs,
+        });
 
-        try {
-            text = await this.languageService.getText({
-                languageCode,
-                messageText,
-                firstName,
-                hedgehogs,
-            });
-            replyMarkup = await this.languageService.getReplyMarkup(
-                languageCode,
-                hedgehogsCount
-            );
-        } catch (error) {
-            console.error('Error getting bot answer: ', (error as any).message);
-            return false;
-        }
+        const replyMarkup = await this.languageService.getReplyMarkup(
+            languageCode,
+            hedgehogsCount
+        );
 
-        try {
-            await this.messengerService.sendMessage({
-                replyMarkup,
-                text,
-                chatId,
-            });
-        } catch (error) {
-            console.error(
-                'Error sending telegram message: ',
-                (error as any).response.data.description
-            );
-            return false;
-        }
-
-        return true;
+        await this.messengerService.sendMessage({
+            replyMarkup,
+            text,
+            chatId,
+        });
     }
 }
