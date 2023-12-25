@@ -18,12 +18,15 @@ functions.http('main', async (req, res) => {
         throw new ConfigParameterNotDefinedError('TELEGRAM_TOKEN');
     }
 
-    if (req.query.token !== process.env.APP_TOKEN) {
-        res.status(401).json({
-            result: 'wrong token',
-        });
-        return;
-    }
+    console.log(req.query.token);
+    console.log(req.query);
+
+    // if (req.query.token !== process.env.TOKEN) {
+    //     res.status(401).json({
+    //         result: 'wrong token',
+    //     });
+    //     return;
+    // }
 
     const hedgehog = new Hedgehog(
         new Json(JSON_URL),

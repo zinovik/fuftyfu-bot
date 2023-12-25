@@ -41,11 +41,10 @@ describe('Hedgehog', () => {
         languageServiceMockGetReplyMarkupNeverCalled();
         messengerServiceMockSendMessageNeverCalled();
 
-        // Act
-        await hedgehog.processMessage(body);
-
         // Act - Assert
-        expect(true).toBeTruthy();
+        expect(async () => {
+            await hedgehog.processMessage(body);
+        }).rejects.toThrow();
     });
 
     it('Should process user message if there is no hedgehog with the number', async () => {
