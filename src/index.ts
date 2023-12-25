@@ -11,8 +11,18 @@ const JSON_URL =
 functions.http('main', async (req, res) => {
     console.log('Triggered!');
 
+    if (process.env.TOKEN === undefined) {
+        throw new ConfigParameterNotDefinedError('TOKEN');
+    }
     if (process.env.TELEGRAM_TOKEN === undefined) {
         throw new ConfigParameterNotDefinedError('TELEGRAM_TOKEN');
+    }
+
+    if (req.query.token !== process.env.APP_TOKEN) {
+        res.status(401).json({
+            result: 'wrong token',
+        });
+        return;
     }
 
     const hedgehog = new Hedgehog(

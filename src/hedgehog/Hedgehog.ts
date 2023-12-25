@@ -19,7 +19,7 @@ export class Hedgehog implements IHedgehogClass {
 
     async processMessage(message: IMessageBody): Promise<void> {
         if (!message.message) {
-            throw new Error(`Bad User Input: ${message}`);
+            throw new Error(`Bad User Input: ${JSON.stringify(message)}`);
         }
 
         const {

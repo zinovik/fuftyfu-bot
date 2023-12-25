@@ -72,5 +72,5 @@ cat key-file.json | base64
 ### creating `ENV` value
 
 ```bash
-cat env-file.yaml | base64
+cat env.yaml | base64
 ```
