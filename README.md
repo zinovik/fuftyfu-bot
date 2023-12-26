@@ -78,7 +78,7 @@ gcloud projects add-iam-policy-binding zinovik-project --member="serviceAccount:
 ### add secrets
 
 ```
-printf "<TELEGRAM_TOKEN>" | gcloud secrets create fuftyfu-bot-telegram-token --locations=us-central1 --replication-policy="user-managed" --data-file=-
+printf "TELEGRAM_TOKE" | gcloud secrets create fuftyfu-bot-telegram-token --locations=us-central1 --replication-policy="user-managed" --data-file=-
 
-printf "<TOKEN>" | gcloud secrets create fuftyfu-bot-app-token --locations=us-central1 --replication-policy="user-managed" --data-file=-
+printf "TOKEN" | gcloud secrets create fuftyfu-bot-app-token --locations=us-central1 --replication-policy="user-managed" --data-file=-
 ```
