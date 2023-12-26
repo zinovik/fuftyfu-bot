@@ -11,7 +11,7 @@
         "test": "jest --config jestconfig.json --coverage",
         "build": "rm -rf dist && tsc",
         "dev": "npm run build && env-cmd -r env.yaml npx @google-cloud/functions-framework --target=main --source=dist",
-        "deploy": "npm run build && cp package*.json dist && gcloud functions deploy fuftyfu-bot --gen2 --trigger-http --runtime nodejs20 --entry-point=main --allow-unauthenticated --region=us-central1 --source=dist --update-build-env-vars=\"GOOGLE_NODE_RUN_SCRIPTS=\" --project zinovik-project --env-vars-file env.yaml"
+        "deploy": "npm run build && cp package*.json dist && gcloud functions deploy fuftyfu-bot --gen2 --trigger-http --runtime nodejs20 --entry-point=main --allow-unauthenticated --region=us-central1 --source=dist --update-build-env-vars=\"GOOGLE_NODE_RUN_SCRIPTS=\" --project zinovik-project --set-secrets=TELEGRAM_TOKEN=fuftyfu-bot-telegram-token:latest,TOKEN=fuftyfu-bot-app-token:latest"
     },
     "dependencies": {
         "@google-cloud/functions-framework": "3.3.0",

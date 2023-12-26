@@ -33,9 +33,5 @@ jobs:
         run: gcloud auth activate-service-account --key-file key-file.json
       - name: Remove key-file.json
         run: rm key-file.json
-      - name: Save environment variables to yaml
-        run: echo "${{ secrets.ENV }}" | base64 -d >> env.yaml
       - name: Build and Deploy
         run: npm run deploy
-      - name: Remove env.yaml
-        run: rm env.yaml
