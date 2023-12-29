@@ -5,8 +5,7 @@ import { Json } from './database/Json.service';
 import { LanguageService } from './language/Language.service';
 import { TelegramService } from './messenger/Telegram.service';
 
-const JSON_URL =
-    'https://raw.githubusercontent.com/zinovik/fuftyfu-data/main/hedgehogs.json';
+const JSON_URL = 'https://storage.googleapis.com/hedgehogs/hedgehogs.json';
 
 functions.http('main', async (req, res) => {
     console.log('Triggered!');
