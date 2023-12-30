@@ -1,11 +1,9 @@
 import * as functions from '@google-cloud/functions-framework';
 import { ConfigParameterNotDefinedError } from './error/ConfigParameterNotDefinedError';
 import { Main } from './main/Main';
-import { Json } from './storage/Json.service';
+import { GoogleStorageService } from './storage/GoogleStorage.service';
 import { LanguageService } from './language/Language.service';
 import { TelegramService } from './messenger/Telegram.service';
-
-const JSON_URL = 'https://storage.googleapis.com/hedgehogs/hedgehogs.json';
 
 functions.http('main', async (req, res) => {
     console.log('Triggered!');
@@ -25,7 +23,7 @@ functions.http('main', async (req, res) => {
     }
 
     const hedgehog = new Main(
-        new Json(JSON_URL),
+        new GoogleStorageService(),
         new LanguageService(),
         new TelegramService(process.env.TELEGRAM_TOKEN)
     );
