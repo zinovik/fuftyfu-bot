@@ -1,7 +1,7 @@
 import { IMock, Mock, It, Times } from 'typemoq';
 
-import { Hedgehog } from '../../src/hedgehog/Hedgehog';
-import { IDatabaseService } from '../../src/database/IDatabaseService.interface';
+import { Main } from '../../src/main/Main';
+import { IStorageService } from '../../src/storage/IStorageService.interface';
 import { ILanguageService } from '../../src/language/ILanguageService.interface';
 import { IMessengerService } from '../../src/messenger/IMessengerService.interface';
 
@@ -9,26 +9,26 @@ import { IHedgehog } from '../../src/common/model/IHedgehog.interface';
 import { IMessageBody } from '../../src/common/model/IMessageBody.interface';
 
 describe('Hedgehog', () => {
-    let databaseServiceMock: IMock<IDatabaseService>;
+    let storageServiceMock: IMock<IStorageService>;
     let languageServiceMock: IMock<ILanguageService>;
     let messengerServiceMock: IMock<IMessengerService>;
 
-    let hedgehog: Hedgehog;
+    let main: Main;
 
     beforeEach(() => {
-        databaseServiceMock = Mock.ofType<IDatabaseService>();
+        storageServiceMock = Mock.ofType<IStorageService>();
         languageServiceMock = Mock.ofType<ILanguageService>();
         messengerServiceMock = Mock.ofType<IMessengerService>();
 
-        hedgehog = new Hedgehog(
-            databaseServiceMock.object,
+        main = new Main(
+            storageServiceMock.object,
             languageServiceMock.object,
             messengerServiceMock.object
         );
     });
 
     afterEach(() => {
-        databaseServiceMock.verifyAll();
+        storageServiceMock.verifyAll();
         languageServiceMock.verifyAll();
         messengerServiceMock.verifyAll();
     });
@@ -36,14 +36,14 @@ describe('Hedgehog', () => {
     it('Should stop working if there is an invalid body', async () => {
         // Arrange
         const body = {} as IMessageBody;
-        databaseServiceMockGetAllHedgehogsNeverCalled();
+        storageServiceMockGetAllHedgehogsNeverCalled();
         languageServiceMockGetTextNeverCalled();
         languageServiceMockGetReplyMarkupNeverCalled();
         messengerServiceMockSendMessageNeverCalled();
 
         // Act - Assert
         expect(async () => {
-            await hedgehog.processMessage(body);
+            await main.processMessage(body);
         }).rejects.toThrow();
     });
 
@@ -66,7 +66,7 @@ describe('Hedgehog', () => {
         const hedgehogs: IHedgehog[] = [];
         const mockText = 'mock-text';
         const mockReplyMarkup = 'mock-reply-markup';
-        databaseServiceMockGetAllHedgehogs(hedgehogs);
+        storageServiceMockGetAllHedgehogs(hedgehogs);
         languageServiceMockGetText(
             { languageCode, messageText, firstName, hedgehogs },
             mockText
@@ -83,15 +83,15 @@ describe('Hedgehog', () => {
         });
 
         // Act
-        await hedgehog.processMessage(body);
+        await main.processMessage(body);
 
         // Assert
         expect(true).toBeTruthy();
     });
 
-    function databaseServiceMockGetAllHedgehogs(hedgehogs: IHedgehog[]) {
-        databaseServiceMock
-            .setup((x: IDatabaseService) => x.getAllHedgehogs())
+    function storageServiceMockGetAllHedgehogs(hedgehogs: IHedgehog[]) {
+        storageServiceMock
+            .setup((x: IStorageService) => x.getAllHedgehogs())
             .returns(async () => hedgehogs)
             .verifiable(Times.once());
     }
@@ -153,9 +153,9 @@ describe('Hedgehog', () => {
             .verifiable(Times.once());
     }
 
-    function databaseServiceMockGetAllHedgehogsNeverCalled() {
-        databaseServiceMock
-            .setup((x: IDatabaseService) => x.getAllHedgehogs())
+    function storageServiceMockGetAllHedgehogsNeverCalled() {
+        storageServiceMock
+            .setup((x: IStorageService) => x.getAllHedgehogs())
             .verifiable(Times.never());
     }
 

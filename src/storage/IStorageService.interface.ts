@@ -1,5 +1,5 @@
 import { IHedgehog } from '../common/model/IHedgehog.interface';
 
-export interface IDatabaseService {
+export interface IStorageService {
     getAllHedgehogs(): Promise<IHedgehog[]>;
 }

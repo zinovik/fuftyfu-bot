@@ -1,21 +1,17 @@
-import { IHedgehogClass } from './IHedgehogClass.interface';
+import { IMain } from './IMain.interface';
 import { IHedgehog } from '../common/model/IHedgehog.interface';
-import { IDatabaseService } from '../database/IDatabaseService.interface';
+import { IStorageService } from '../storage/IStorageService.interface';
 import { ILanguageService } from '../language/ILanguageService.interface';
 import { IMessengerService } from '../messenger/IMessengerService.interface';
 
 import { IMessageBody } from '../common/model/IMessageBody.interface';
 
-export class Hedgehog implements IHedgehogClass {
+export class Main implements IMain {
     constructor(
-        private readonly databaseService: IDatabaseService,
+        private readonly storageService: IStorageService,
         private readonly languageService: ILanguageService,
         private readonly messengerService: IMessengerService
-    ) {
-        this.databaseService = databaseService;
-        this.languageService = languageService;
-        this.messengerService = messengerService;
-    }
+    ) {}
 
     async processMessage(message: IMessageBody): Promise<void> {
         if (!message.message) {
@@ -33,7 +29,7 @@ export class Hedgehog implements IHedgehogClass {
         const messageText = messageTextDirty.trim().toLowerCase();
 
         const hedgehogs: IHedgehog[] =
-            await this.databaseService.getAllHedgehogs();
+            await this.storageService.getAllHedgehogs();
 
         const hedgehogsCount = hedgehogs.length;
 
