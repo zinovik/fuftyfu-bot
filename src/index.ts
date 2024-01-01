@@ -5,6 +5,9 @@ import { GoogleStorageService } from './storage/GoogleStorage.service';
 import { LanguageService } from './language/Language.service';
 import { TelegramService } from './messenger/Telegram.service';
 
+const BUCKET_NAME = 'hedgehogs';
+const FILE_NAME = 'hedgehogs.json';
+
 functions.http('main', async (req, res) => {
     console.log('Triggered!');
 
@@ -23,7 +26,7 @@ functions.http('main', async (req, res) => {
     }
 
     const hedgehog = new Main(
-        new GoogleStorageService(),
+        new GoogleStorageService(BUCKET_NAME, FILE_NAME),
         new LanguageService(),
         new TelegramService(process.env.TELEGRAM_TOKEN)
     );

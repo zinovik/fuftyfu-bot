@@ -3,15 +3,15 @@ import { Bucket, Storage, File } from '@google-cloud/storage';
 import { IStorageService } from './IStorageService.interface';
 import { IHedgehog } from '../common/model/IHedgehog.interface';
 
-const BUCKET_NAME = 'hedgehogs';
-const FILE_NAME = 'hedgehogs.json';
-
 export class GoogleStorageService implements IStorageService {
-    private readonly storage: Storage = new Storage();
     private readonly bucket: Bucket;
 
-    constructor() {
-        this.bucket = this.storage.bucket(BUCKET_NAME);
+    constructor(
+        private readonly bucketName: string,
+        private readonly fileName: string
+    ) {
+        const storage: Storage = new Storage();
+        this.bucket = storage.bucket(this.bucketName);
     }
 
     private streamToString(stream: Stream): Promise<string> {
@@ -28,7 +28,7 @@ export class GoogleStorageService implements IStorageService {
     }
 
     async getAllHedgehogs(): Promise<IHedgehog[]> {
-        const file: File = this.bucket.file(FILE_NAME);
+        const file: File = this.bucket.file(this.fileName);
 
         const data = await this.streamToString(file.createReadStream());
 
