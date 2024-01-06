@@ -14,24 +14,9 @@ export class GoogleStorageService implements IStorageService {
         this.bucket = storage.bucket(this.bucketName);
     }
 
-    private streamToString(stream: Stream): Promise<string> {
-        const chunks: Uint8Array[] = [];
-        return new Promise((resolve, reject) => {
-            stream.on('data', (chunk: string) =>
-                chunks.push(Buffer.from(chunk))
-            );
-            stream.on('error', (error: Error) => reject(error));
-            stream.on('end', () =>
-                resolve(Buffer.concat(chunks).toString('utf8'))
-            );
-        });
-    }
-
     async getAllHedgehogs(): Promise<IHedgehog[]> {
-        const file: File = this.bucket.file(this.fileName);
+        const file = await this.bucket.file(this.fileName).download();
 
-        const data = await this.streamToString(file.createReadStream());
-
-        return JSON.parse(data);
+        return JSON.parse(file.toString());
     }
 }
