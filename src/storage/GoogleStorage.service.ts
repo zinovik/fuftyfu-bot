@@ -1,5 +1,4 @@
-import { Stream } from 'stream';
-import { Bucket, Storage, File } from '@google-cloud/storage';
+import { Bucket, Storage } from '@google-cloud/storage';
 import { IStorageService } from './IStorageService.interface';
 import { IHedgehog } from '../common/model/IHedgehog.interface';
 
