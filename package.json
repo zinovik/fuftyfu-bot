@@ -14,18 +14,18 @@
         "deploy": "npm run build && cp package*.json dist && gcloud functions deploy fuftyfu-bot --gen2 --trigger-http --runtime nodejs20 --entry-point=main --allow-unauthenticated --region=europe-central2 --source=dist --update-build-env-vars=\"GOOGLE_NODE_RUN_SCRIPTS=\" --project zinovik-project --set-secrets=TELEGRAM_TOKEN=fuftyfu-bot-telegram-token:latest,TOKEN=fuftyfu-bot-app-token:latest --service-account=fuftyfu@zinovik-project.iam.gserviceaccount.com"
     },
     "dependencies": {
-        "@google-cloud/functions-framework": "3.3.0",
-        "@google-cloud/storage": "7.7.0",
-        "axios": "1.6.3",
+        "@google-cloud/functions-framework": "5.0.2",
+        "@google-cloud/storage": "7.19.0",
+        "axios": "1.13.6",
         "stream-shift": "1.0.3"
     },
     "devDependencies": {
-        "@types/jest": "29.5.11",
-        "env-cmd": "10.1.0",
-        "jest": "29.7.0",
-        "ts-jest": "29.1.1",
+        "@types/jest": "30.0.0",
+        "env-cmd": "11.0.0",
+        "jest": "30.2.0",
+        "ts-jest": "29.4.6",
         "typemoq": "2.1.0",
-        "typescript": "5.3.3"
+        "typescript": "5.9.3"
     },
     "author": "Max Zinovik",
     "license": "Apache-2.0",

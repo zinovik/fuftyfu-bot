@@ -1,19 +1,35 @@
-FROM node:12.6.0
+FROM node:24-alpine AS builder
 
-# Create work directory
 WORKDIR /app
 
-# Copy app config files
-COPY package.json ./
-COPY package-lock.json ./
+COPY package.json package-lock.json ./
 
-# Install app dependencies
-RUN npm install
+RUN npm ci
 
-# Copy app source to work directory
 COPY src ./src
 COPY tsconfig.json ./
-COPY .eslintrc ./
+RUN npm run build
 
-# Build and run the app
-CMD npm run dev
+RUN npm prune --production
+
+###
+
+FROM node:24-alpine
+
+WORKDIR /app
+
+# add non‑root user
+RUN addgroup -S app && adduser -S app -G app
+USER app
+
+ENV NODE_ENV=production
+
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/dist ./dist
+# (optional) copy src if you need source maps:
+# COPY --from=builder /app/src ./src
+
+EXPOSE 8080
+
+CMD ["node", "dist/index.js"]
